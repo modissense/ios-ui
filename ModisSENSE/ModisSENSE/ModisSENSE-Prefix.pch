@@ -1,0 +1,30 @@
+//
+// Prefix header for all source files of the 'ModisSENSE' target in the 'ModisSENSE' project
+//
+
+#import <Availability.h>
+#import "AFNetworking.h"    //Networking class
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+//    #import <SystemConfiguration/SystemConfiguration.h>
+//
+//    #if TARGET_OS_IPHONE
+//        #import <MobileCoreServices/MobileCoreServices.h>
+//    #endif
+
+#endif
+
+
+#define MyLog NSLog
+//#define MyLog(...)
+
+#define ADJUST_IOS7_LAYOUT    self.edgesForExtendedLayout = UIRectEdgeNone;
+
+typedef void (^JSONResponseBlock)(NSDictionary* json);
+typedef void (^Clean)(void);
