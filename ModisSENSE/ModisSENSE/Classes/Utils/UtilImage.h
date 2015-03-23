@@ -10,7 +10,8 @@
 
 @interface UtilImage : NSObject
 
-+(void) loadAsyncImage: (UIImageView *)imageView fromURL:(NSString *)url withDefaultImage:(NSString *)defaultImage;
++(CGSize) getImageDimensionsFromURL:(NSString*)url;
++(CGSize) loadAsyncImage: (UIImageView *)imageView fromURL:(NSString *)url withDefaultImage:(NSString *)defaultImage;
 +(void) loadAsyncImage: (UIImageView *)imageView fromURL:(NSString *)url;
 
 @end

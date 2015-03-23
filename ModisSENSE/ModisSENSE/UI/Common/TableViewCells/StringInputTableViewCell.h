@@ -13,6 +13,8 @@
 @protocol StringInputTableViewCellDelegate <NSObject>
 @optional
 - (void)tableViewCell:(StringInputTableViewCell *)cell didEndEditingWithString:(NSString *)value;
+- (void)stratedEditingStringCell;
+- (void)endedEditingStringCell;
 @end
 
 

@@ -11,15 +11,17 @@
 
 @interface POI : NSObject <NSCoding>
 
-@property (strong,nonatomic) NSString* poi_id;
+@property (assign,nonatomic) int seqid;
+@property (assign,nonatomic) int poi_id;
 @property (strong,nonatomic) NSString* name;
 @property (strong,nonatomic) CLLocation* location;
 @property (strong,nonatomic) NSString *timestamp;
 @property (assign,nonatomic) int interest;
 @property (assign,nonatomic) int hotness;
 @property (assign,nonatomic) BOOL publicity;
+@property (assign,nonatomic) BOOL isMine;
 @property (strong,nonatomic) NSArray* keywords;     //Array of keyword strings
-@property (strong,nonatomic) NSString* description;
+@property (strong,nonatomic) NSString* comment;
 
 @property (strong,nonatomic) NSString *startDate;
 @property (strong,nonatomic) NSString *endDate;

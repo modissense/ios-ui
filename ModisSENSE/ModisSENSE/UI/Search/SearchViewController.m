@@ -18,6 +18,9 @@
     //Remember cell for resigning firstresponder afterwards
     StringInputTableViewCell *stringcell;
     
+    NSString* addressMarqueeText;
+    BOOL areaSelected;
+    
     //Search criteria data
     NSArray* keywords;
     CLLocation* centerLocation;
@@ -40,6 +43,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //For ios7
+    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7)
+        ADJUST_IOS7_LAYOUT
+    
+    UIImageView* bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mapblur"]];
+    self.tableView.backgroundView = bgView;
+    
+    addressMarqueeText = L(CHOOSESEARCHAREA);
+    areaSelected = NO;
 
     //Set up search button
     [self.searchButton setTitle:L(SEARCH) forState:UIControlStateNormal];
@@ -81,216 +94,253 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 7;
+    if (section==0)
+        return 6;
+    else
+        return 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return L(SEARCHCR);
+    if (section==0)
+        return L(SEARCHCR);
+    else
+        return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger row = indexPath.row;
     
-    switch (row)
+    if (indexPath.section == 0 )
     {
-        case 0:
+        switch (row)
         {
-            static NSString *CellIdentifier = @"StringInputCell";
-            StringInputTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-            if (cell == nil)
+            case 0:
             {
-                //For the default cells
-                cell = [[StringInputTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                stringcell = cell;
-            }
-            cell.delegate=self;
-            
-            cell.imageView.image = [UIImage imageNamed:@"search"];
-            cell.textField.placeholder = L(SEARCHCRITERIA);
-            return cell;
-        }
-        case 1:
-        {
-            NSString *CellIdentifier = @"AddressPickerCell";
-            LocationMarqueeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            
-            if (cell == nil)
-            {
-                cell = [[LocationMarqueeCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
-            }
-            
-            if (![self isEmptyString:address])
-            {
-                NSString* a = L(MAPAREASELECTED);
+                NSString *CellIdentifier = @"AddressPickerCell";
+                LocationMarqueeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
                 
-                cell.marqueeLabel.text = [a stringByAppendingString:address];
-                cell.marqueeLabel.textColor = DEFAULTBLUE;
+                if (cell == nil)
+                {
+                    cell = [[LocationMarqueeCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
+                }
+                
+                cell.backgroundColor = [UIColor clearColor];
+                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transpbg"]];
+                cell.backgroundView.alpha = CELLALPHA;
+                
+                cell.marqueeLabel.text = addressMarqueeText;
+                cell.marqueeLabel.textColor = CELLGRAYCOLOR;
+                
+                if (areaSelected)
+                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                else
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                return cell;
             }
-            else
+            case 1:
             {
-                cell.marqueeLabel.text = L(CHOOSESEARCHAREA);
-                cell.marqueeLabel.textColor = [UIColor redColor];
+                static NSString *CellIdentifier = @"StringInputCell";
+                StringInputTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                
+                if (cell == nil)
+                {
+                    //For the default cells
+                    cell = [[StringInputTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                    stringcell = cell;
+                }
+                cell.delegate=self;
+                
+                cell.backgroundColor = [UIColor clearColor];
+                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transpbg"]];
+                cell.backgroundView.alpha = CELLALPHA;
+                
+                cell.imageView.image = [UIImage imageNamed:@"search"];
+                cell.textField.placeholder = L(SEARCHCRITERIA);
+                return cell;
             }
-            
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            return cell;
-        }
-        case 2:
-        {
-            NSString *CellIdentifier = @"SearchDateInputCell";
-            DateInputTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            
-            if (cell == nil)
+            case 2:
             {
-                cell = [[DateInputTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-                cell.delegate = self;
+                NSString *CellIdentifier = @"SearchDateInputCell";
+                DateInputTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                
+                if (cell == nil)
+                {
+                    cell = [[DateInputTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+                    cell.delegate = self;
+                    cell.textLabel.font = CELLFONT;
+                    cell.detailTextLabel.font = CELLFONT;
+                }
+                
+                cell.backgroundColor = [UIColor clearColor];
+                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transpbg"]];
+                cell.backgroundView.alpha = CELLALPHA;
+                
+                cell.tag = row;
+                cell.imageView.image = [UIImage imageNamed:@"from"];
+                
+                [cell setMaxDate:[NSDate date]];
+                
+                cell.textLabel.textColor = CELLGRAYCOLOR;
+                cell.textLabel.text = L(STARTDATE);
+                
+                cell.detailTextLabel.textColor = DEFAULTBLUE;
+                
+                cell.datePickerMode = UIDatePickerModeDate;
+                cell.dateValue = startDate;
+                
+                if (!startDate)
+                    cell.detailTextLabel.text = L(NODATESET);
+                
+                return cell;
+            }
+            case 3:
+            {
+                NSString *CellIdentifier = @"SearchDateInputCell";
+                DateInputTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                
+                if (cell == nil)
+                {
+                    cell = [[DateInputTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+                    cell.delegate = self;
+                    cell.textLabel.font = CELLFONT;
+                    cell.detailTextLabel.font = CELLFONT;
+                }
+                
+                cell.backgroundColor = [UIColor clearColor];
+                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transpbg"]];
+                cell.backgroundView.alpha = CELLALPHA;
+                
+                cell.tag = row;
+                cell.imageView.image = [UIImage imageNamed:@"to"];
+                
+                [cell setMaxDate:[NSDate date]];
+                
+                cell.textLabel.textColor = CELLGRAYCOLOR;
+                cell.textLabel.text = L(ENDDATE);
+                
+                cell.detailTextLabel.textColor = DEFAULTBLUE;
+                
+                cell.datePickerMode = UIDatePickerModeDate;
+                cell.dateValue = endDate;
+                
+                if (!endDate)
+                    cell.detailTextLabel.text = L(NODATESET);
+                
+                return cell;
+            }
+            case 4:
+            {
+                NSString *CellIdentifier = @"ClassificationPickerCell";
+                ClassificationCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                
+                if (cell == nil)
+                {
+                    cell = [[ClassificationCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+                    cell.delegate = self;
+                }
+                
+                cell.backgroundColor = [UIColor clearColor];
+                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transpbg"]];
+                cell.backgroundView.alpha = CELLALPHA;
+                
+                cell.imageView.image = [UIImage imageNamed:@"feed"];
+                
+                cell.textLabel.textColor = CELLGRAYCOLOR;
                 cell.textLabel.font = CELLFONT;
+                cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", orderby.description, L(RESULTS)];
+                
+                cell.detailTextLabel.textColor = DEFAULTBLUE;
                 cell.detailTextLabel.font = CELLFONT;
+                cell.detailTextLabel.text = @"";
+                
+                if ([orderby.classification isEqualToString:HOTNESS])
+                {
+                    UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hot"]];
+                    cell.accessoryView = imageView;
+                }
+                
+                if ([orderby.classification isEqualToString:INTEREST])
+                {
+                    UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"interesting"]];
+                    cell.accessoryView = imageView;
+                }
+                
+                cell.accessoryType = 0;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                return cell;
+                break;
             }
-            
-            cell.tag = row;
-            cell.imageView.image = [UIImage imageNamed:@"from"];
-            
-            [cell setMaxDate:[NSDate date]];
-            
-            cell.textLabel.textColor = CELLGRAYCOLOR;
-            cell.textLabel.text = L(STARTDATE);
-            
-            cell.detailTextLabel.textColor = DEFAULTBLUE;
-            
-            cell.datePickerMode = UIDatePickerModeDateAndTime;
-            cell.dateValue = startDate;
-            
-            if (!startDate)
-                cell.detailTextLabel.text = L(NODATESET);
-            
-            return cell;
-        }
-        case 3:
-        {
-            NSString *CellIdentifier = @"SearchDateInputCell";
-            DateInputTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            
-            if (cell == nil)
+            case 5:
             {
-                cell = [[DateInputTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-                cell.delegate = self;
+                static NSString *CellIdentifier = @"Cell";
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                
+                if (cell == nil)
+                {
+                    //For the default cells
+                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+                }
+                
+                cell.backgroundColor = [UIColor clearColor];
+                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transpbg"]];
+                cell.backgroundView.alpha = CELLALPHA;
+                
+                cell.imageView.image = [UIImage imageNamed:@"friends"];
+                
+                cell.textLabel.textColor = CELLGRAYCOLOR;
                 cell.textLabel.font = CELLFONT;
+                cell.textLabel.text = L(FRIENDSFILTER);
+                
+                cell.detailTextLabel.textColor = DEFAULTBLUE;
                 cell.detailTextLabel.font = CELLFONT;
+                
+                if (friendIDs.count==0)
+                    cell.detailTextLabel.text = L(NOFILTER);
+                else
+                {
+                    if (friendIDs.count == 1)
+                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d %@", friendIDs.count, L(FRIEND)];
+                    else
+                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d %@", friendIDs.count, L(FRIENDS)];
+                }
+                
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                return cell;
             }
-            
-            cell.tag = row;
-            cell.imageView.image = [UIImage imageNamed:@"to"];
-            
-            [cell setMaxDate:[NSDate date]];
-            
-            cell.textLabel.textColor = CELLGRAYCOLOR;
-            cell.textLabel.text = L(ENDDATE);
-            
-            cell.detailTextLabel.textColor = DEFAULTBLUE;
-            
-            cell.datePickerMode = UIDatePickerModeDateAndTime;
-            cell.dateValue = endDate;
-            
-            if (!endDate)
-                cell.detailTextLabel.text = L(NODATESET);
-            
-            return cell;
+            default:
+                return nil;
         }
-        case 4:
-        {
-            NSString *CellIdentifier = @"ClassificationPickerCell";
-            ClassificationCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            
-            if (cell == nil)
-            {
-                cell = [[ClassificationCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-                cell.delegate = self;
-            }
-            
-            cell.imageView.image = [UIImage imageNamed:@"feed"];
-            
-            cell.textLabel.textColor = CELLGRAYCOLOR;
-            cell.textLabel.font = CELLFONT;
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", orderby.description, L(RESULTS)];
-            
-            cell.detailTextLabel.textColor = DEFAULTBLUE;
-            cell.detailTextLabel.font = CELLFONT;
-            cell.detailTextLabel.text = @"";
-            
-            if ([orderby.classification isEqualToString:HOTNESS])
-            {
-                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hot"]];
-                cell.accessoryView = imageView;
-            }
-            
-            if ([orderby.classification isEqualToString:INTEREST])
-            {
-                UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"interesting"]];
-                cell.accessoryView = imageView;
-            }
-            
-            cell.accessoryType = 0;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            return cell;
-            break;
-        }
-        case 5:
-        {
-            static NSString *CellIdentifier = @"Cell";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            
-            if (cell == nil)
-            {
-                //For the default cells
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-            }
-            cell.imageView.image = [UIImage imageNamed:@"friends"];
-            
-            cell.textLabel.textColor = CELLGRAYCOLOR;
-            cell.textLabel.font = CELLFONT;
-            cell.textLabel.text = L(FRIENDSFILTER);
-            
-            cell.detailTextLabel.textColor = DEFAULTBLUE;
-            cell.detailTextLabel.font = CELLFONT;
-            
-            if (friendIDs.count==0)
-                cell.detailTextLabel.text = L(NOFILTER);
-            else
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%d %@", friendIDs.count, L(FRIENDS)];
-            
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            return cell;
-        }
-        case 6:
-        {
-            SliderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StepperCell"];
-            cell.delegate = self;
-            
-            cell.title.textColor = CELLGRAYCOLOR;
-            
-            //Initial value is 25
-            cell.title.text = [NSString stringWithFormat:@"%@ (%d)",L(NUMBEROFRESULTS), numberOfResults];
-            cell.selectionStyle=0;
-            
-            return cell;
-        }
-        default:
-            return nil;
+    }
+    else
+    {
+        SliderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StepperCell"];
+        cell.delegate = self;
+        
+        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transpbg"]];
+        cell.backgroundView.alpha = CELLALPHA;
+        
+        cell.title.textColor = CELLGRAYCOLOR;
+        
+        //Initial value is 25
+        cell.title.text = [NSString stringWithFormat:@"%@ (%d)",L(NUMBEROFRESULTS), numberOfResults];
+        cell.selectionStyle=0;
+        
+        return cell;
     }
 }
 
@@ -301,39 +351,42 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Pick a location from the map
-    switch (indexPath.row)
+    if (indexPath.section == 0)
     {
-        case 1:
+        switch (indexPath.row)
         {
-            PickLocationViewController *controller = [[PickLocationViewController alloc] init];
-            controller.showPin = NO;
-            controller.delegate = self;
-            [self.navigationController pushViewController:controller animated:YES];
-            
-            break;
-        }
-        case 5:
-        {
-            if (Eng.user.twitterFriends.count>0 || Eng.user.facebookFriends.count>0 || Eng.user.foursquareFriends.count>0)
+            case 0:
             {
-                SearchUserTableViewController *userSelection =[self.storyboard instantiateViewControllerWithIdentifier:@"SearchUserTableID"];
-                userSelection.delegate=self;
+                PickLocationViewController *controller = [[PickLocationViewController alloc] init];
+                controller.showPin = NO;
+                controller.delegate = self;
+                [self.navigationController pushViewController:controller animated:YES];
                 
-                if (friendIDs.count>0)
-                    userSelection.selectedFriendIDs = [[NSMutableArray alloc] initWithArray:friendIDs];
-                else
-                    userSelection.selectedFriendIDs = [[NSMutableArray alloc] init];
-                    
-                [self.navigationController pushViewController:userSelection animated:YES];
+                break;
             }
-            else
+            case 5:
             {
-                [SVProgressHUD showErrorWithStatus:L(NOFRIENDSAVAILABLE)];
+                if (Eng.user.twitterFriends.count>0 || Eng.user.facebookFriends.count>0 || Eng.user.foursquareFriends.count>0)
+                {
+                    SearchUserTableViewController *userSelection =[self.storyboard instantiateViewControllerWithIdentifier:@"SearchUserTableID"];
+                    userSelection.delegate=self;
+                    
+                    if (friendIDs.count>0)
+                        userSelection.selectedFriendIDs = [[NSMutableArray alloc] initWithArray:friendIDs];
+                    else
+                        userSelection.selectedFriendIDs = [[NSMutableArray alloc] init];
+                        
+                    [self.navigationController pushViewController:userSelection animated:YES];
+                }
+                else
+                {
+                    [SVProgressHUD showErrorWithStatus:L(NOFRIENDSAVAILABLE)];
+                }
+                break;
             }
-            break;
+            default:
+                break;
         }
-        default:
-            break;
     }
 }
 
@@ -353,7 +406,7 @@
 #pragma mark - Pick location delegate
 
 - (void)didEndEditingWithCoordinates:(CLLocation *)coordinates {
-    [self loadAddressFromCoordinates:coordinates];
+//    [self loadAddressFromCoordinates:coordinates];
     
     centerLocation = coordinates;
     NSLog(@"Lat: %f , Lng: %f", coordinates.coordinate.latitude, coordinates.coordinate.longitude);
@@ -376,6 +429,9 @@
     NSLog(@"Selected Map rect:");
     NSLog(@"North West coordinates Lat:%f Lng:%f",northWestCorner.latitude,northWestCorner.longitude);
     NSLog(@"South East coordinates Lat:%f Lng:%f",southEastCorner.latitude,southEastCorner.longitude);
+    
+    areaSelected = YES;
+    addressMarqueeText = L(MAPAREASELECTED);
 }
 
 
@@ -383,6 +439,10 @@
 #pragma mark - API to get address from coordinates
 
 - (void)loadAddressFromCoordinates: (CLLocation *)coordinates {
+    
+    addressMarqueeText = L(RETRIEVINGADDRESS);
+    [self.tableView reloadData];
+    
     //Start request for address details
     AddressCoordinates *addresscrd = [[AddressCoordinates alloc] init];
     addresscrd.delegate = self;
@@ -475,7 +535,7 @@
     
     numberOfResults = value;
     
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:6 inSection:0];
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
     SliderCell *cell = (SliderCell *) [self.tableView cellForRowAtIndexPath:indexPath];
     
     cell.title.text = [NSString stringWithFormat:@"%@ (%d)",L(NUMBEROFRESULTS), value];
@@ -501,6 +561,11 @@
         [SVProgressHUD showErrorWithStatus:L(CHECKDATEORDER)];
         return;
     }
+    else if ([startDate compare:endDate] == NSOrderedAscending && friendIDs.count==0)
+    {
+        [SVProgressHUD showErrorWithStatus:L(NOFRIENDSSELECTED)];
+        return;
+    }
 
     NSMutableArray* mapRect = [NSMutableArray array];
     [mapRect addObject:[NSNumber numberWithDouble:northWestCorner.latitude]];
@@ -523,9 +588,12 @@
     {
         MapResultsViewController *mapResultsVC =[self.storyboard instantiateViewControllerWithIdentifier:@"MapResultsViewID"];
         mapResultsVC.region = searchRegion;
-        mapResultsVC.showTrajectory = NO;
         mapResultsVC.pointsOfInterest = poiList;
         [self.navigationController pushViewController:mapResultsVC animated:YES];
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:L(NOTHINGFOUND)];
     }
 }
 
@@ -542,9 +610,12 @@
     southEastCorner.latitude = 0;
     southEastCorner.longitude = 0;
     
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     StringInputTableViewCell *cell = (StringInputTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
     cell.textField.text = @"";
+    
+    areaSelected = NO;
+    addressMarqueeText = L(CHOOSESEARCHAREA);
     
     [self.tableView reloadData];
 }

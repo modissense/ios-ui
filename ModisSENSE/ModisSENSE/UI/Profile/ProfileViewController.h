@@ -10,7 +10,10 @@
 #import "UserEngine.h"
 #import "UIConstants.h"
 #import "Engine.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface ProfileViewController : UITableViewController
+@interface ProfileViewController : UITableViewController <MFMailComposeViewControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UIImageView *userAvatarImg;
 
 @end

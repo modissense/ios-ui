@@ -10,8 +10,10 @@
 #import "SwitchCell.h"
 #import "UserEngine.h"
 
-@interface SettingsViewController : UITableViewController <SwitchCellDelegate, UserEngineDelegate>
+@interface SettingsViewController : UITableViewController <SwitchCellDelegate, UserEngineDelegate, UIAlertViewDelegate>
 
-- (void)getConnectedAccounts;
+- (void)getFriends;
+
+@property (assign, nonatomic) BOOL newSocialMediaLoaded;
 
 @end

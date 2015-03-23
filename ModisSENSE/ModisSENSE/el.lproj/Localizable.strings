@@ -13,8 +13,98 @@
 // Common
 /*******************************************************/
 
+/* Noon */
+"NOON" = "Μεσημ.";
+
+/* Position tracking activated */
+"POSITIONTRACKINGACTIVATED" = "Η ανίχνευση θέσης ενεργοποιήθηκε";
+
+/* Position tracking deactivated */
+"POSITIONTRACKINGDEACTIVATED" = "Η ανίχνευση θέσης απενεργοποιήθηκε";
+
+/* Wait */
+"WAIT" = "Περίμενε..";
+
+/* Visualise */
+"VISUALIZE" = "Απεικόνιση";
+
+/* Visitors */
+"VISITORS" = "επισκέπτες";
+
+/* Visitor */
+"VISITOR" = "επισκέπτης";
+
+/* Visits */
+"VISITS" = "επισκέψεις";
+
+/* Visits */
+"VISIT" = "επίσκεψη";
+
+/* What your friends think */
+"WHATYOURFRIENDSTHINK" = "Τι γνώμη έχουν οι φίλοι σου";
+
+/* Comments */
+"COMMENTS" = "σχόλια";
+
+/* Comment */
+"COMMENT" = "σχόλιο";
+
+/* Close */
+"CLOSE" = "Κλείσιμο";
+
+/* Results */
+"RESULTS" = "Αποτελέσματα";
+
+/* % of results found */
+"RESULTSFOUND" = "διαθέσιμα αποτελέσματα";
+
+/* % of nearest pois found */
+"NEARESTPOISFOUND" = "κοντινά διαθέσιμα σημεία ενδιαφέροντος";
+
+/* Are you sure */
+"AREYOUSURE" = "Επιβεβαίωση διαγραφής;";
+
+/* Pull down to refresh or search */
+"PULLDOWNTOREFRESHORSEARCH" = "Τράβα για ανανέωση ή αναζήτηση";
+
+/* You are not connected with this social account */
+"NOTCONNECTEDTOSOCIALACCOUNT" = "Δεν είστε συνδεδεμένοι με αυτόν το λογαριασμό";
+
+/* Share */
+"SHAREBLOG" = "Αποστολή";
+
+/* Blog shared */
+"BLOGSHARED" = "Το ιστολόγιο δημοσιεύθηκε";
+
+/* successful shares */
+"SUCCESSFULSHARES" = "επιτυχημένες δημοσιεύσεις";
+
+/* successful shares */
+"SUCCESSFULSHARE" = "επιτυχημένh δημοσίευση";
+
+/* Select at least one social media */
+"SELECTONESOCIAL" = "Επιλέξτε τουλάχιστον ένα κοινωνικό δίκτυο";
+
+/* Send */
+"SEND" = "Αποστολή";
+
 /* Done */
 "DONE" = "Τέλος";
+
+/* meters */
+"METERS" = "μέτρα";
+
+/* km */
+"KM" = "χλμ";
+
+/* Select */
+"SELECT" = "Επιλογή";
+
+/* Hint */
+"HINT" = "Υπόδειξη";
+
+/* More */
+"MORE" = "Περισσότερα";
 
 /* Hour */
 "HOUR" = "ώρα";
@@ -22,14 +112,23 @@
 /* Hours */
 "HOURS" = "ώρες";
 
+/* Minutes */
+"MINUTES" = "λεπτά";
+
+/* Minute */
+"MINUTE" = "λεπτό";
+
 /* Point of interest */
 "POI" = "Σημείο Ενδιαφέροντος";
 
 /* Location details */
-"LOCATIONDETAILS" = "Λεπτομέρεις τοποθεσίας";
+"LOCATIONDETAILS" = "Λεπτομέρειες τοποθεσίας";
 
 /* Edit */
 "EDIT" = "Επεξεργασία";
+
+/* Show info */
+"SHOWINFO" = "Πληροφορίες";
 
 /* Delete */
 "DELETE" = "Διαγραφή";
@@ -44,7 +143,7 @@
 "REFRESH" = "Ανανέωση";
 
 /* Reset */
-"RESET" = "Ανανέωση";
+"RESET" = "Επαναφορά";
 
 /* Post */
 "POST" = "Δημοσίευση";
@@ -59,7 +158,7 @@
 "CONNECTIONERROR" = "Σφάλμα Σύνδεσης";
 
 /* Retrieving address */
-"RETRIEVINGADDRESS" = "Ανάκτηση θέσης";
+"RETRIEVINGADDRESS" = "Ανάκτηση θέσης..";
 
 /* Caution */
 "CAUTION" = "Προσοχή";
@@ -76,8 +175,14 @@
 /* Signing Out */
 "SIGNINGOUT" = "Αποσύνδεση";
 
+/* Removing account */
+"REMOVINGACCOUNT" = "Αφαίρεση λογαριασμού";
+
 /* About */
 "ABOUT" = "Σχετικά";
+
+/* About ModisSENSE */
+"ABOUTMODISSENSE" = "Σχετικά με το ModisSENSE";
 
 /* Results */
 "RESULTS" = "Αποτελέσματα";
@@ -98,13 +203,85 @@
 "GOTIT" = "Εντάξει";
 
 /* No location services detected */
-"NOLOCATIONSERVICES" = "Οι υπηρεσίες τοποθεσίας δεν είναι ενεργές";
+"NOLOCATIONSERVICES" = "Οι υπηρεσίες τοποθεσίας δεν είναι ενεργές. Ενεργοποιήστε τες στις ρυθμίσεις της συσκευής σας.";
 
 /* Failed */
 "FAILED" = "Aπέτυχε";
 
 /* History */
 "HISTORY" = "Ιστορικό";
+
+/* Name */
+"NAME" = "Όνομα";
+
+/* Duration */
+"DURATION" = "Διάρκεια";
+
+/* Edit Duration */
+"CHANGEDURATION" = "Αλλαγή διάρκειας";
+
+/* Check Duration */
+"CHECKDURATION" = "Η διάρκεια δεν είναι σωστή";
+
+/* Change activity */
+"CHANGEACTIVITY" = "Αλλαγή δραστηριότητας";
+
+/* Activity */
+"ACTIVITY" = "Δραστηριότητα";
+
+/* Update */
+"UPDATE" = "Ενημέρωση";
+
+/* Updated */
+"UPDATED" = "Ενημερώθηκε";
+
+/* Save changes */
+"SAVECHANGES" = "Αποθήκευση αλλαγών";
+
+/* Share */
+"SHARE" = "Δημοσίευση";
+
+/* Locations */
+"LOCATIONS" = "σημεία";
+
+/* Zoom in to see them */
+"ZOOMINTOSEETHEM" = "Κάνε zoom για να τα δεις";
+
+/* No address available */
+"NOADDRESSAVAILABLE" = "Δεν υπάρχει διαθέσιμη διεύθυνση";
+
+/* Getting address */
+"GETTINGADDRESS" = "Ανάκτηση θέσης..";
+
+/* Getting directions */
+"GETTINGDIRECTIONS" = "Υπολογισμός διαδρομής";
+
+/* Could not get directions */
+"COULDNOTGETDIRECTIONS" = "Η διαδρομή δεν μπόρεσε να βρεθεί";
+
+/* Swipe left to delete */
+"SWIPELEFTTODELETE" = "Αριστερό swipe για διαγραφή";
+
+/* No description */
+"NODESCRIPTION" = "Δεν υπάρχει περιγραφή";
+
+/* No description available */
+"NODESCRIPTIONAVAILABLE" = "Χωρίς περιγραφή";
+
+/* No name available */
+"NONAME" = "Άγνωστο Όνομα";
+
+/* No active e-mail account in device */
+"NOACTIVEMAILACCOUNT" = "Δεν υπάρχει έγκυρος λογαριασμός e-mail στη συσκευή";
+
+/* Thank you */
+"THANKYOU" = "Ευχαριστούμε";
+
+/* Time table */
+"TIMETABLE" = "Χρονοδιάγραμμα";
+
+/* No frends selected for current time period */
+"NOFRIENDSSELECTED" = "Δεν έχουν επιλεγεί φίλοι για τη συγκεκριμένη χρονική περίοδο";
 
 
 /*******************************************************/
@@ -117,6 +294,9 @@
 /* Select Location */
 "SELECTLOCATION" = "Επιλέξτε Τοποθεσία";
 
+/* Could not get location. Try zooming closer */
+"TRYZOOMINGCLOSER" = "Η τοποθεσία δεν μπόρεσε να βρεθεί. Προσπαθείστε ξανά.";
+
 
 
 /*******************************************************/
@@ -125,6 +305,21 @@
 
 /* Navigation bar title */
 "HOME" = "Αρχική";
+
+/* Show trends */
+"SHOWTRENDS" = "Δες εξελίξεις";
+
+/* Trending */
+"TRENDING" = "Εξελίξεις";
+
+/* Trending now */
+"TRENDINGNOW" = "Εξελίξεις τώρα";
+
+/* Getting trends */
+"GETTINGTRENDS" = "Αναζήτηση εξελίξεων";
+
+/* Nothing is trending */
+"NOTHINGTRENDING" = "Δεν υπάρχουν εξελίξεις σε αυτή τη περιοχή";
 
 /* Map */
 "MAP" = "Χάρτης";
@@ -137,6 +332,9 @@
 
 /* Add new location */
 "ADDNEW" = "Προσθήκη νέου";
+
+/* How to add new POI */
+"HOWTOADDNEWPOI" = "Μπορείτε να προσθέσετε ένα καινούριο σημείο ενδιαφέροντος πατώντας παρατεταμένα το σημείο για το οποίο ενδιαφέρεστε";
 
 
 
@@ -159,6 +357,9 @@
 /* Filter by friends */
 "FRIENDSFILTER" = "Φιλτράρισμα με φίλους";
 
+/* Can not delete main account */
+"CANNOTDELETEMAINACCOUNT" = "Αυτός είναι ο κύριος λογαριασμός σας. Αν θέλετε να διαγράψετε τελείως τον λογαριααμό σας πηγαίνετε στην σελίδα του Προφίλ";
+
 
 
 /*******************************************************/
@@ -166,7 +367,10 @@
 /*******************************************************/
 
 /* Show user's current location on map */
-"GETTINGFRIENDS" = "Ανάκτηση φίλων";
+"GETTINGFRIENDS" = "Αναζήτηση φίλων";
+
+/* Friend */
+"FRIEND" = "Φίλος";
 
 /* Friends */
 "FRIENDS" = "Φίλοι";
@@ -177,39 +381,53 @@
 /* You have no friends */
 "NOFRIENDSAVAILABLE" = "Δεν υπάρχουν διαθέσιμοι φίλοι";
 
-/*Pull to refresh friends */
-"PULLTOREFRESHFRIENDS" = "Τράβα για να ανανεώσεις τουσ φίλους σου";
+/* Pull to refresh */
+"PULLTOREFRESH" = "Τράβα για ανανέωση";
+
+/* Pull to refresh friends */
+"PULLTOREFRESHFRIENDS" = "Τράβα για να ανανέωση φίλων";
 
 /* Select all twitter friends */
-"SELECTALLTWITTERFRIENDS" = "Επιλογή όλων των φίλων στο Twitter";
+"SELECTALLTWITTERFRIENDS" = "Επιλογή όλων στο Twitter";
 
 /* Select all facebook friends */
-"SELECTALLFACEBOOKFRIENDS" = "Επιλογή όλων των φίλων στο Facebook";
+"SELECTALLFACEBOOKFRIENDS" = "Επιλογή όλων στο Facebook";
 
 /* Select all foursquare friends */
-"SELECTALLFOURSQUAREFRIENDS" = "Επιλογή όλων των φίλων στο Foursquare";
+"SELECTALLFOURSQUAREFRIENDS" = "Επιλογή όλων στο Foursquare";
 
 /* No twitter friends availabke */
-"NOTWITTERFRIENDSAVAILABLE" = "Δεν βρέθηκαν διαθέσιμοι φίλοι στο Twitter";
+"NOTWITTERFRIENDSAVAILABLE" = "Δεν βρέθηκαν φίλοι στο Twitter";
 
 /* No facebook friends availabke */
-"NOFACEBOOKFRIENDSAVAILABLE" = "Δεν βρέθηκαν διαθέσιμοι φίλοι στο Facebook";
+"NOFACEBOOKFRIENDSAVAILABLE" = "Δεν βρέθηκαν φίλοι στο Facebook";
 
 /* No foursquare friends availabke */
-"NOFOURSQUAREFRIENDSAVAILABLE" = "Δεν βρέθηκαν διαθέσιμοι φίλοι στο Foursquare";
+"NOFOURSQUAREFRIENDSAVAILABLE" = "Δεν βρέθηκαν φίλοι στο Foursquare";
 
 /* Empty all selections */
 "EMPTYSELECTIONS" = "Καθαρισμός όλων των επιλογών";
 
+/* Select Twitter friends */
+"SELECTTWITTERFRIENDS" = "Επιλέξτε Twitter φίλους";
+
+/* Select Facebook friends */
+"SELECTFACEBOOKFRIENDS" = "Επιλέξτε Facebook φίλους";
+
+/* Select Foursquare friends */
+"SELECTFOURSQUAREFRIENDS" = "Επιλέξτε Foursquare φίλους";
+
 
 
 /*******************************************************/
-// Post To Social View Controller
+// Post To Social
 /*******************************************************/
 
 /* Post button */
 "POST" = "Δημοσίευση";
 
+/* Add more social media to your account in order to share */
+"ADDMORESOCIALACCOUNTS" = "Η δημοσίευση είναι προς το παρόν διαθέσιμη μόνο στο Twitter και στο Facebook. Προσθέστε επιπλέον λογαριασμούς στις ρυθμίσεις της εφαρμογής.";
 
 
 /*******************************************************/
@@ -249,14 +467,20 @@
 /* Interest */
 "INTEREST" = "Ενδιαφέροντα";
 
+/* Hot poi */
+"HOTPOI" = "Καυτό σημείο";
+
+/* Interesting poi */
+"INTERESTINGPOI" = "Ενδιαφέρον σημείο";
+
 /* Number of results */
 "NUMBEROFRESULTS" = "Αποτελέσματα";
 
 /* Getting point of interest */
-"GETTINGPOIS" = "Ανάκτηση σημείων ενδιαφέροντος";
+"GETTINGPOIS" = "Αναζήτηση σημείων ενδιαφέροντος";
 
 /* Getting nearest neighbours */
-"GETTINGNEARESTNEIGHBOURS" = "Ανάκτηση κοντινών σημείων";
+"GETTINGNEARESTNEIGHBOURS" = "Αναζήτηση κοντινών σημείων";
 
 /* No resutls found */
 "NOTHINGFOUND" = "Δεν βρέθηκαν αποτελέσματα";
@@ -265,7 +489,7 @@
 "SELECTSEARCHAREA" = "Παρακαλώ επιλέξτε περιοχή αναζήτησης";
 
 /* Map area selected with center:  */
-"MAPAREASELECTED" = "Περιοχή στον χάρτη επιλέχτηκε με κέντρο: ";
+"MAPAREASELECTED" = "Περιοχή στον χάρτη επιλέχτηκε";
 
 /* Check your date order */
 "CHECKDATEORDER" = "Ελέγξτε την σειρά των ημερομηνιών σας";
@@ -292,10 +516,13 @@
 "BLOGS" = "Ιστολόγια";
 
 /* Trajectory */
-"GETTRAJECTORY" = "Δες Τροχιά";
+"TRAJECTORY" = "Τροχιά";
+
+/* View Trajectory */
+"VIEWTRAJECTORY" = "Προβολή Πορείας";
 
 /* Getting Blogs */
-"GETTINGBLOGS" = "Ανάκτηση Ιστολογίων";
+"GETTINGBLOGS" = "Αναζήτηση Ιστολογίων";
 
 /* Getting trajectory */
 "GETTINGTRAJECTORY" = "Ανάκτηση τροχιάς";
@@ -311,6 +538,9 @@
 
 /* Blog */
 "BLOG" = "Ιστολόγιο";
+
+/* Trajectory */
+"TRAJECTORY" = "Τροχιά";
 
 /* Blog name */
 "BLOG_NAME" = "Ονομασία";
@@ -334,11 +564,37 @@
 "PUBLISHED" = "Δημοσιευμένο";
 
 /* Add Record baed on location */
-"ADD_RECORD" = "Προσθήκη τοποθεσίας";
+"ADD_RECORD" = "Νέα τοποθεσία";
 
 /* You are not authorized for this action */
 "NOTAUTHORIZEDFORTHISACTION" = "Δεν έχετε πρόσβαση σε αυτή την ενέργεια";
 
+/* You don't own this point of interest */
+"NOTOWNINGPOI" = "Δεν είστε δημιουργός αυτής της τοποθεσίας";
+
+/* Add a new visit */
+"ADDANEWVISIT" = "Προσθέστε μία νέα επίσκεψη";
+
+/* Add a blog day */
+"ADDANEWBLOGDAY" = "Προσθήκη νέας ημέρας";
+
+/* Select a location from the map */
+"SELECTLOCATIONFROMMAP" = "Επιλέξτε σημείο στον χάρτη";
+
+/* No keywords available */
+"NOKEYWORDSAVAILABLE" = "Δεν υπάρχουν λέξεις-κλειδιά";
+
+/* Sharing blog */
+"SHARINGBLOG" = "Αποστολή ιστολογίου";
+
+/* Show blog day activity */
+"SHOWSTORY" = "Εμφάνιση ημερήσιας δραστηριότητας";
+
+/* Don't show this again */
+"DONTSHOWAGAIN" = "Απόκρυψη";
+
+/* Could not get coordinates, please try again */
+"COULDNOTGETCOORDINATES" = "Οι συντεταγμένες δεν βρέθηκαν, προσπαθήστε ξανα";
 
 
 /*******************************************************/
@@ -414,6 +670,9 @@
 /* Updating POI */
 "UPDATINGPOI" = "Ενημέρωση τοποθεσίας";
 
+/* Updating blog */
+"UPDATINGBLOG" = "Ενημέρωση ιστολογίου";
+
 /* If you like a place tell us about it */
 "TELLUSABOUTIT" = "Αν σου αρέσει ένα μέρος\nΠες το μας εδώ";
 
@@ -427,7 +686,7 @@
 "ADDASNEW" = "Προσθήκη ως νέο";
 
 /* Duplicate POIS */
-"DUPLICATEPOIS" = "Διπλοεγγραφές";
+"DUPLICATEPOIS" = "Τι υπάρχει";
 
 /* Deleting POI */
 "DELETINGPOI" = "Διαγράφεται";
@@ -438,11 +697,31 @@
 /* See them on a mao */
 "SEETHEMONAMAP" = "Προβολή σε χάρτη";
 
+/* Show trajectory on map */
+"SHOWTRAJECTORYONMAP" = "Προβολή τροχιάς στον χάρτη";
+
+/* Adding new visit */
+"ADDINGNEWVISIT" = "Προσθήκη νέας επίσκεψης";
+
+/* Add a new blog date */
+"ADDNEWBLOGDATE" = "Προσθέστε νέα μέρα";
+
+/* Delete poi from trajectory */
+"DELETEBLOGPOI" = "Διαγραφή από το ιστολόγιο";
 
 
 /*******************************************************/
 // Settings View Controller
 /*******************************************************/
+
+/* Remove Twitter */
+"REMOVETWITTER" = "Αφαίρεση Twitter";
+
+/* Remove Facebook */
+"REMOVEFACEBOOK" = "Αφαίρεση Facebook";
+
+/* Remove Foursquare */
+"REMOVEFOURSQUARE" = "Αφαίρεση Foursquare";
 
 /* Track my position */
 "TRACK_POSITION" = "Ανίχνευση θέσης";
@@ -457,7 +736,7 @@
 "ACCOUNTSETTINGS" = "Ρυθμίσεις Λογαριασμού";
 
 /* Social Accounts Connections */
-"SOCIALACCOUNTSCONNECTIONS" = "Συνδέσεις λογαριασμών κοινωνικής δικτύωσης";
+"SOCIALACCOUNTSCONNECTIONS" = "Συνδέσεις Κοινωνικών Δικτύων";
 
 
 
@@ -472,13 +751,19 @@
 "ACCOUNT" = "Λογαριασμός";
 
 /* Actions */
-"ACTIONS" = "Ενέργεις";
+"ACTIONS" = "Ενέργειες";
 
 /* change Password */
 "CHANGE_PASSWORD" = "Αλλαγή Κωδικού";
 
 /* Delete account */
 "DELETE_ACCOUNT" = "Διαγραφή Λογαριασμού";
+
+/* Account deleted */
+"ACCOUNT_DELETED" = "Ο λογαριασμός διαγράφηκε";
+
+/* All connected social accoutns will be removed */
+"ACCOUNTSWILLBEREMOVED" = "Θέλετε όλα τα συνδεδεμένα κοινωνικά δίκτυα να διαγραφούν;";
 
 /* Sign out */
 "SIGN_OUT" = "Αποσύνδεση";
@@ -503,7 +788,19 @@
 /*******************************************************/
 
 /* Sign in */
-"SIGNIN" = "Συνδεθείτε";
+"SIGNIN" = "Σύνδεση";
 
 /* Sign in with your social account */
 "SIGNINWITHYOURSOCIALACCOUNT" = "Συνδεθείτε με τον λογαριασμό σας";
+
+
+/*******************************************************/
+// Selectable Map View Controller
+/*******************************************************/
+
+/* Selectable map info */
+"SELECTABLEMAPINFO" = "Επιλέξτε ένα σημείο ενδιαφέροντος ή εισάγετε ένα καινούριο πατώντας προσθήκη νέου";
+
+/* New visit added */
+"MEWVISITADDED" = "Η νέα επίσκεψη προστέθηκε";
+

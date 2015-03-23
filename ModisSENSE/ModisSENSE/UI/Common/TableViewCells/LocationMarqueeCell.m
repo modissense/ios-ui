@@ -55,12 +55,26 @@
     [super layoutSubviews];
     
     if (savedStyle == UITableViewCellStyleValue2) {
+        
         CGRect editFrame = CGRectInset(self.contentView.frame, CELLPADDING, 10);
-        CGRect frame = CGRectMake(46, CGRectGetMinY(editFrame)+3, CGRectGetWidth(editFrame)- 36, CGRectGetHeight(editFrame));
+        
+        CGRect frame;
+        
+        if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7)
+            frame = CGRectMake(46, CGRectGetMinY(editFrame)+3, CGRectGetWidth(editFrame)- 36, CGRectGetHeight(editFrame));
+        else
+            frame = CGRectMake(36, CGRectGetMinY(editFrame)+3, CGRectGetWidth(editFrame)- 36, CGRectGetHeight(editFrame));
+        
         iMarqueeLabel.frame = frame;
         iMarqueeLabel.backgroundColor = [UIColor clearColor];
         
-        UIImageView *leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(CELLPADDING,frame.size.height/2+3,16,16)]; // set the location and size of your imageview here.
+        UIImageView *leftImage;
+        
+        if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7)
+            leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(CELLPADDING,frame.size.height/2+3,16,16)]; // set the location and size of your imageview here.
+        else
+            leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(10,frame.size.height/2+3,16,16)];
+            
         leftImage.image = [UIImage imageNamed:@"location"];
         
         [self.contentView addSubview:leftImage];

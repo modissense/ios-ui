@@ -20,7 +20,8 @@
 - (void)openModissense;
 
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UILabel *chooseLabel;
 
-- (IBAction)infoButtonClicked:(id)sender;
-
+@property (weak, nonatomic) IBOutlet UILabel *modissenseLabel;
 @end

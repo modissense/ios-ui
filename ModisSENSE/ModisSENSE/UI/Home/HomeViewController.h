@@ -7,18 +7,33 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GMapView.h"
-#import "HomeSettingsViewController.h"
+#import "ClusterMapView.h"
 #import "LocationTracker.h"
 #import "POIEngine.h"
+#import "UserEngine.h"
+#import "EditPOIViewController.h"
+#import "AddPOIViewController.h"
+#import "UserSelectionViewController.h"
+#import "POIDetailsView.h"
 
-@interface HomeViewController : UIViewController <GMapViewDelegate,LocationUpdatedDelegate,MKOverlay,MapSettingsDelegate,UserEngineDelegate,POIEngineDelegate>
+@interface HomeViewController : UIViewController <ClusterMapViewSelectionDelegate,ClusterMapViewDelegate,MKMapViewDelegate,LocationUpdatedDelegate,MKOverlay,UserEngineDelegate,POIEngineDelegate,EditPOIViewControllerDelegate,AddPOIViewControllerDelegate,UIActionSheetDelegate,UserSelectionDelegate>
+
+@property (weak, nonatomic) IBOutlet ClusterMapView *gMapView;
+
+//Trending now
+@property (weak, nonatomic) IBOutlet UIView *trendingNowView;
+@property (weak, nonatomic) IBOutlet UILabel *trendingNowLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *trendingNowImage;
 
 
-@property (weak, nonatomic) IBOutlet GMapView *gMapView;
+//POI details view
+@property (weak, nonatomic) IBOutlet POIDetailsView *poiDetailsView;
 
-- (IBAction)showMapSettings:(id)sender;
-- (IBAction)addNewPOIClicked:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *editBtn;
+@property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 
-@property (weak, nonatomic) IBOutlet UILabel *addLocation;
+- (IBAction)closeMoreView:(id)sender;
+- (IBAction)editPOIBtnClicked:(id)sender;
+
+
 @end

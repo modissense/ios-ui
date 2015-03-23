@@ -42,11 +42,13 @@ static LocationTracker *_sharedInstance = nil;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
         NSData *blogsData = [defaults objectForKey:key];
-        NSMutableDictionary *blogs = [NSKeyedUnarchiver unarchiveObjectWithData:blogsData];
         
-        if (blogs == nil) {
+        NSMutableDictionary *blogs;
+        
+        if (blogsData != nil)
+            blogs = [NSKeyedUnarchiver unarchiveObjectWithData:blogsData];
+        else
             blogs = [NSMutableDictionary dictionary];
-        }
         
         //Searches to find if blogName already exists
         iBlog = [blogs objectForKey:blogName];
@@ -69,6 +71,9 @@ static LocationTracker *_sharedInstance = nil;
             
             // Set a movement threshold for new events.
             locationManager.distanceFilter = kGPSDistanceFilter;
+            
+            if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+                [locationManager requestAlwaysAuthorization];
         }
         
         //Start monitoring
@@ -90,11 +95,13 @@ static LocationTracker *_sharedInstance = nil;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
        
         NSData *blogsData = [defaults objectForKey:key];
-        NSMutableDictionary *blogs = [NSKeyedUnarchiver unarchiveObjectWithData:blogsData];
         
-        if (blogs == nil) {
+        NSMutableDictionary *blogs;
+        
+        if (blogsData != nil)
+            blogs = [NSKeyedUnarchiver unarchiveObjectWithData:blogsData];
+        else
             blogs = [NSMutableDictionary dictionary];
-        }
         
         //Insert/update blog info
         [blogs setObject:iBlog forKey:iBlog.name];
@@ -114,15 +121,18 @@ static LocationTracker *_sharedInstance = nil;
  * Returns a blog by blog name
  */
 - (Blog *)blogByName: (NSString *)blogName {
+    
     NSString *key = kSavedBlogsStorageKey;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSData *blogsData = [defaults objectForKey:key];
-    NSMutableDictionary *blogs = [NSKeyedUnarchiver unarchiveObjectWithData:blogsData];
     
-    if (blogs == nil) {
+    NSMutableDictionary *blogs;
+    
+    if (blogsData != nil)
+        blogs = [NSKeyedUnarchiver unarchiveObjectWithData:blogsData];
+    else
         blogs = [NSMutableDictionary dictionary];
-    }
 
     return [blogs objectForKey:blogName];
 }
@@ -135,11 +145,13 @@ static LocationTracker *_sharedInstance = nil;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSData *blogsData = [defaults objectForKey:key];
-    NSMutableDictionary *blogs = [NSKeyedUnarchiver unarchiveObjectWithData:blogsData];
     
-    if (blogs == nil) {
+    NSMutableDictionary *blogs;
+    
+    if (blogsData != nil)
+        blogs = [NSKeyedUnarchiver unarchiveObjectWithData:blogsData];
+    else
         blogs = [NSMutableDictionary dictionary];
-    }
 
     [blogs removeObjectForKey:blogName];
     
@@ -157,11 +169,13 @@ static LocationTracker *_sharedInstance = nil;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSData *blogsData = [defaults objectForKey:key];
-    NSMutableDictionary *blogs = [NSKeyedUnarchiver unarchiveObjectWithData:blogsData];
     
-    if (blogs == nil) {
+    NSMutableDictionary *blogs;
+    
+    if (blogsData != nil)
+        blogs = [NSKeyedUnarchiver unarchiveObjectWithData:blogsData];
+    else
         blogs = [NSMutableDictionary dictionary];
-    }
     
     return blogs;
 }
@@ -254,7 +268,7 @@ static LocationTracker *_sharedInstance = nil;
         [self.locationUpdateDelegate traceSent];
     }
     
-    NSLog(@"Trace(s) sent to the server! Memory cleared");
+    NSLog(@"%d trace(s) sent to the server! Memory cleared", self.tracesSent);
 }
 
 @end

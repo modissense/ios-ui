@@ -10,9 +10,7 @@
 
 @interface UserPreferences : NSObject
 
-@property (assign,nonatomic) BOOL showCurrentLocation;
 @property (assign,nonatomic) BOOL trackUserPosition;
-@property (assign,nonatomic) BOOL showPointsOfInterest;
 
 //Dictionaries of Friend objects
 @property (strong,nonatomic) NSMutableDictionary *selectedTwitterUsers;

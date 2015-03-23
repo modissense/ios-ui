@@ -47,6 +47,10 @@ __strong NSArray *publicityValues = nil;
 	[self.picker selectRow:[publicityValues indexOfObject:publicity] inComponent:0 animated:YES];
 }
 
+-(void)setPickerRow:(int)row {
+    [self.picker selectRow:row inComponent:0 animated:YES];
+}
+
 #pragma mark -
 #pragma mark UIPickerViewDataSource
 

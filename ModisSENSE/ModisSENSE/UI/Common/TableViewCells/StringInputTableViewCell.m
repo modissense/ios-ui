@@ -83,14 +83,19 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (delegate && [delegate respondsToSelector:@selector(endedEditingStringCell)]) {
+		[delegate endedEditingStringCell];
+	}
 	[self.textField resignFirstResponder];
 	return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-	if (delegate && [delegate respondsToSelector:@selector(tableViewCell:didEndEditingWithString:)]) {
+    
+    if (delegate && [delegate respondsToSelector:@selector(tableViewCell:didEndEditingWithString:)]) {
 		[delegate tableViewCell:self didEndEditingWithString:self.stringValue];
 	}
+    
 //	UITableView *tableView = (UITableView *)self.superview;
 //	[tableView deselectRowAtIndexPath:[tableView indexPathForCell:self] animated:YES];
     [self resignFirstResponder];
@@ -100,7 +105,8 @@
 	[super layoutSubviews];
     
     CGRect editFrame = CGRectInset(self.contentView.frame, CELLPADDING, CELLPADDING);
-    editFrame.origin.y += 3;    //Customize it as you wish
+//    editFrame.origin.y += 3;    //Customize it as you wish
+    editFrame.size.height +=3;
     
     if (savedStyle == UITableViewCellStyleValue2) {
         self.textField.frame = CGRectMake(110, CGRectGetMinY(editFrame), CGRectGetWidth(editFrame)-110, CGRectGetHeight(editFrame));
@@ -109,7 +115,12 @@
         
         if (self.imageView.image) {
             CGSize imgSize = self.imageView.image.size;
-            editFrame.origin.x += imgSize.width + 15;
+            
+            if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7)
+                editFrame.origin.x += imgSize.width + 15;
+            else
+                editFrame.origin.x += imgSize.width + 6;
+            
             editFrame.size.width -= imgSize.width + 10;
         }
         
@@ -136,6 +147,16 @@
         }
     }
     [super setEditing:editing animated:animated];
+}
+
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *) textField
+{
+    if (delegate && [delegate respondsToSelector:@selector(stratedEditingStringCell)]) {
+		[delegate stratedEditingStringCell];
+	}
+    
+    return YES;
 }
 
 @end

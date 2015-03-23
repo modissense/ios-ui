@@ -178,7 +178,11 @@
     
     if(string) {
 //        CGSize stringSize = [string sizeWithAttributes:[NSDictionary dictionaryWithObject:[UIFont fontWithName:@"Verdana-Bold" size:14.0] forKey:NSFontAttributeName]];
-        CGSize stringSize = [string sizeWithFont:self.stringLabel.font constrainedToSize:CGSizeMake(200, 300)];
+//        CGSize stringSize = [string sizeWithFont:self.stringLabel.font constrainedToSize:CGSizeMake(200, 300)];
+        
+        NSDictionary *stringAttributes = [NSDictionary dictionaryWithObject:self.stringLabel.font forKey: NSFontAttributeName];
+        CGSize stringSize = [string boundingRectWithSize:CGSizeMake(200, 300) options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin attributes:stringAttributes context:nil].size;
+        
         stringWidth = stringSize.width;
         stringHeight = stringSize.height;
         hudHeight = 80+stringHeight;

@@ -15,6 +15,7 @@
 
 
 -(void)connectWithSocialMedia:(NSString*)social userid:(NSString*)userId {
+    
     [Eng.apiClient connectWithSocialMedia:social userid:userId];
 }
 
@@ -48,9 +49,9 @@
 
 
 
--(void)getFriendsForUser:(NSString*)userId {
+-(void)getFriendsForUser:(NSString*)userId showLoader:(BOOL)loader {
     
-    [Eng.apiClient getFriendsForUser:userId
+    [Eng.apiClient getFriendsForUser:userId showLoader:loader
        onSuccess:^(NSDictionary* json){
            
            //Clean friends for a refresh
@@ -64,8 +65,18 @@
            
            NSDictionary* user = [json objectForKey:USER];
            
+           //Get primary account for ModisSENSE
+           Eng.user.mainAccount = [user objectForKey:PRIMARYACCOUNT];
+           
            //Get user name
-           Eng.user.userName = [user objectForKey:USERNAME];
+           NSString* username = [user objectForKey:USERNAME];
+           if (username!=nil && username != (id)[NSNull null] && ![username isEqualToString:@"null"])
+               Eng.user.userName = username;
+           else
+               Eng.user.userName = nil;
+           
+           //Avatar URL
+           Eng.user.avatarURL = [user objectForKey:IMAGE];
            
            //Get user's friends
            NSArray* connections = [user objectForKey:CONNECTIONS];
@@ -86,6 +97,7 @@
                        Friend* friend = [[Friend alloc] init];
                        friend.friendId = [friendJSON objectForKey:ID];
                        friend.name = [friendJSON objectForKey:NAMESMALL];
+                       friend.avatarImgURL = [friendJSON objectForKey:URL];
                        
                        [Eng.user.twitterFriends addObject:friend];
                    }
@@ -98,6 +110,7 @@
                        Friend* friend = [[Friend alloc] init];
                        friend.friendId = [friendJSON objectForKey:ID];
                        friend.name = [friendJSON objectForKey:NAMESMALL];
+                       friend.avatarImgURL = [friendJSON objectForKey:URL];
                        
                        [Eng.user.facebookFriends addObject:friend];
                    }
@@ -110,16 +123,12 @@
                        Friend* friend = [[Friend alloc] init];
                        friend.friendId = [friendJSON objectForKey:ID];
                        friend.name = [friendJSON objectForKey:NAMESMALL];
+                       friend.avatarImgURL = [friendJSON objectForKey:URL];
                        
                        [Eng.user.foursquareFriends addObject:friend];
                    }
                }
            }
-           
-           //Show a message of how many friends found
-           int numberOfFriends = Eng.user.twitterFriends.count + Eng.user.facebookFriends.count + Eng.user.foursquareFriends.count;
-           NSString* friendsFound = [NSString stringWithFormat:@"%d %@",numberOfFriends, L(FRIENDSFOUND)];
-           [SVProgressHUD showSuccessWithStatus:friendsFound];
            
            //Call the delegate
            if (self.delegate && [self.delegate respondsToSelector:@selector(gotFriends)]) {
@@ -130,7 +139,7 @@
 
 
 -(void)signOutUser {
-    
+    /*
     [Eng.apiClient signOutUserId:Eng.user.userId
         onSuccess:^(NSDictionary* json){
         
@@ -141,13 +150,59 @@
             else
                 [SVProgressHUD showErrorWithStatus:@""];
         }];
-    
+    */
     [self clearUserData];
+}
+
+
+-(void)deleteUser {
+    
+    [Eng.apiClient deleteSocial:nil fromUserId:Eng.user.userId onSuccess:^(NSDictionary *json) {
+        
+        NSString* success = [json objectForKey:SUCCESS];
+        
+        if ([success isEqualToString:@"true"])
+        {
+            [SVProgressHUD showSuccessWithStatus:L(ACCOUNT_DELETED)];
+            
+            [self clearUserData];
+            
+            //Call the delegate
+            if (self.delegate && [self.delegate respondsToSelector:@selector(userDeleted)]) {
+                [self.delegate userDeleted];
+            }
+        }
+        else
+            [SVProgressHUD showErrorWithStatus:L(FAILED)];
+    }];
+}
+
+
+
+-(void)removeSocialAccount:(NSString*)account {
+    
+    [Eng.apiClient deleteSocial:account fromUserId:Eng.user.userId onSuccess:^(NSDictionary *json) {
+        
+        NSString* success = [json objectForKey:SUCCESS];
+        
+        if ([success isEqualToString:@"true"])
+        {
+            [SVProgressHUD showSuccessWithStatus:L(ACCOUNT_DELETED)];
+            
+            //Call the delegate
+            if (self.delegate && [self.delegate respondsToSelector:@selector(accountRemoved)]) {
+                [self.delegate accountRemoved];
+            }
+        }
+        else
+            [SVProgressHUD showErrorWithStatus:L(FAILED)];
+    }];
 }
 
 -(void)clearUserData {
     Eng.user.userId = nil;
     Eng.user.userName = nil;
+    Eng.user.socialAccounts = nil;
     [Eng.user.socialAccounts removeAllObjects];
     [Eng.user.twitterFriends removeAllObjects];
     [Eng.user.facebookFriends removeAllObjects];

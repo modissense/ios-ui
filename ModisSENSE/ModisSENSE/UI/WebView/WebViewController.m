@@ -24,6 +24,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    //For ios7
+    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7)
+        ADJUST_IOS7_LAYOUT
+    
     NSURL *nsurl=[NSURL URLWithString:urlString];
     NSURLRequest *nsrequest=[NSURLRequest requestWithURL:nsurl];
     
@@ -46,6 +50,7 @@
 }
 
 
+//Callback delegate
 -(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
     
 //    if ( inType == UIWebViewNavigationTypeLinkClicked )

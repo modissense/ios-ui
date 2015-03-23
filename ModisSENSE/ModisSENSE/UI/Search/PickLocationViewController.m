@@ -65,7 +65,7 @@
         iMapView = [[GMapView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) latitude:Eng.locationTracker.currentlocation.coordinate.latitude longitude:Eng.locationTracker.currentlocation.coordinate.longitude callout:L(YOUAREHERE) calloutSub:nil accessory:YES pinType:1 draggable:NO selectTarget:nil selectAction:nil];
         iMapView.showsUserLocation = YES;
         
-        info = [[UIView alloc] initWithFrame:CGRectMake(iMapView.frame.size.width-164,60, 160,70)];
+        info = [[UIView alloc] initWithFrame:CGRectMake(iMapView.frame.size.width-164,60, 160,90)];
         info.backgroundColor = [UIColor whiteColor];
         info.layer.opacity = 1.0;
         
@@ -73,8 +73,11 @@
         [infoLayer setMasksToBounds:YES];
         [infoLayer setCornerRadius:5.0];
         
+        UIImageView* pinchImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pinch"]];
+        pinchImg.frame = CGRectMake(info.frame.size.width/2-10, 5, 20, 20);
+        
         UILabel *infoLabel;
-        infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5,info.frame.size.width-10,info.frame.size.height-10)];
+        infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 15,info.frame.size.width-10,info.frame.size.height-10)];
         infoLabel.backgroundColor = [UIColor clearColor];
         infoLabel.numberOfLines = 0;
         infoLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -83,13 +86,14 @@
         infoLabel.font = [UIFont systemFontOfSize:13];
         infoLabel.text = L(SELECTARECTAREA);
         
+        [info addSubview:pinchImg];
         [info addSubview:infoLabel];
         
         [iMapView addSubview: info];
         
         
         [UIView animateWithDuration:1.0 animations:^{
-            info.frame = CGRectMake(iMapView.frame.size.width-164,5, 160,70);
+            info.frame = CGRectMake(iMapView.frame.size.width-164,5, 160,90);
         }];
         
         [UIView animateWithDuration:30.0 animations:^{
@@ -114,6 +118,7 @@
     if (delegate && [delegate respondsToSelector:@selector(didEndEditingWithRegion:)]) {
 		[delegate didEndEditingWithRegion:iMapView.region];
 	}
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -134,8 +139,8 @@
     if (infoView)
         [infoView removeFromSuperview];
     
-    [iMapView removeFromSuperview];
-    iMapView = nil;
+//    [iMapView removeFromSuperview];
+//    iMapView = nil;
 }
 
 

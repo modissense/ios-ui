@@ -13,12 +13,17 @@
 #import "Config.h"
 #import "SignInViewController.h"
 #import "SettingsViewController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    /*******/
+    //Fabric Crashlytics, don't touch
+    [Fabric with:@[CrashlyticsKit]];
+    /*******/
     
     //Here you should get user's preferences
     Eng.preferences.trackUserPosition = YES;
@@ -36,7 +41,7 @@
 
 
 //Handle callback with URL scheme
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     if (!url)
         return NO;
@@ -55,7 +60,7 @@
         Eng.user.userId = [parameters objectForKey:@"uid"];
         MyLog(@"Got user id (token): %@",Eng.user.userId);
 
-        if (![Util isEmptyString:Eng.user.userId])
+        if (Eng.user.userId && ![Util isEmptyString:Eng.user.userId] && ![Eng.user.userId isEqualToString:@"null"])
             [signInController openModissense];
         else
         {
@@ -70,12 +75,19 @@
     }
     else
     {
-        //Refresh connected accounts
+        //Parse URL to get user id
+        NSMutableDictionary* parameters = [UtilURL parseURL:url];
         
+        //Get user id
+        Eng.user.userId = [parameters objectForKey:@"uid"];
+        MyLog(@"Got user id (token): %@",Eng.user.userId);
+        
+        //Refresh connected accounts
         //Find the Settings view controller and refresh the Eng.user.socialAccounts array
         UINavigationController *navController = (UINavigationController *)[[self.modissenseTabController viewControllers] objectAtIndex:3];
         SettingsViewController* settingsController = [[navController viewControllers] objectAtIndex:0];
-        [settingsController getConnectedAccounts];
+        [settingsController getFriends];
+        settingsController.newSocialMediaLoaded = YES;
     }
     
     return YES;

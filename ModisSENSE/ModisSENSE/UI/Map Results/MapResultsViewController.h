@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GMapView.h"
+#import "ClusterMapView.h"
 #import "EditPOIViewController.h"
+#import "POIDetailsView.h"
 
-@interface MapResultsViewController : UIViewController <GMapViewDelegate,EditPOIViewControllerDelegate>
+@interface MapResultsViewController : UIViewController <ClusterMapViewSelectionDelegate,ClusterMapViewDelegate,MKMapViewDelegate,EditPOIViewControllerDelegate,UIActionSheetDelegate,POIEngineDelegate>
 
 //Array of POI objects
 @property (strong,nonatomic) NSArray* pointsOfInterest;
@@ -18,8 +19,18 @@
 //Zoom area region
 @property (assign,nonatomic) MKCoordinateRegion region;
 
-@property (assign,nonatomic) BOOL showTrajectory;
+@property (assign,nonatomic) BOOL notEditable;
 
-@property (weak, nonatomic) IBOutlet GMapView *gMapView;
 
+@property (weak, nonatomic) IBOutlet ClusterMapView *gMapView;
+
+//More view
+//POI details view
+@property (weak, nonatomic) IBOutlet POIDetailsView *poiDetailsView;
+
+@property (weak, nonatomic) IBOutlet UIButton *editBtn;
+@property (weak, nonatomic) IBOutlet UIButton *closeBtn;
+
+- (IBAction)closeMoreView:(id)sender;
+- (IBAction)editPOIBtnClicked:(id)sender;
 @end

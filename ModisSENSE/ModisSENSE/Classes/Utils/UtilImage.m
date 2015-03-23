@@ -11,11 +11,21 @@
 
 @implementation UtilImage
 
++(CGSize) getImageDimensionsFromURL:(NSString*)url {
+    return [self loadAsyncImage:nil fromURL:url withDefaultImage:nil];
+}
+
 +(void) loadAsyncImage: (UIImageView *)imageView fromURL:(NSString *)url {
     [self loadAsyncImage:imageView fromURL:url withDefaultImage:@""];
 }
 
-+(void) loadAsyncImage: (UIImageView *)imageView fromURL:(NSString *)url withDefaultImage:(NSString *)defaultImage {
++(CGSize) loadAsyncImage: (UIImageView *)imageView fromURL:(NSString *)url withDefaultImage:(NSString *)defaultImage {
+    
+    
+    BOOL isUserInteractionenabled = imageView.userInteractionEnabled;
+    
+    if (isUserInteractionenabled)
+        imageView.userInteractionEnabled = NO;
     
     //Get hashed representation for image url
     NSString *hashed = [Util MD5Hash:url];
@@ -24,12 +34,24 @@
     //Checks if image exists
     BOOL imageExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
     
+    __block CGSize returnSize =  CGSizeMake(0, 0);
+    
     if (imageExists) {
         NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
         UIImage *image = [UIImage imageWithData:imageData];
-        imageView.image = image;
-    } else {
-        //Load image from url
+        
+        returnSize = image.size;
+        
+        if (imageView)
+        {
+            imageView.image = image;
+            
+            if (isUserInteractionenabled)
+                imageView.userInteractionEnabled = YES;
+        }
+    }
+    else
+    {//Load image from url
         /************/
         //Lazy loading images (Asychronous call)
         int width = imageView.bounds.size.width;
@@ -40,8 +62,10 @@
             height = 40;
         }
         
-        imageView.image = [UIImage imageNamed:defaultImage];
+        if (imageView)
+            imageView.image = [UIImage imageNamed:defaultImage];
         
+        /*
         UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]
                                             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         
@@ -51,11 +75,12 @@
         
         [imageView addSubview:spinner];
         [spinner startAnimating];
+        */
         
         NSURL *urlObject = [NSURL URLWithString:url];
         NSURLRequest *urlRequest = [NSURLRequest requestWithURL:urlObject];
         
-        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
         
         dispatch_async(queue, ^{
             NSURLResponse *response = nil;
@@ -68,17 +93,31 @@
             UIImage *image = [[UIImage alloc] initWithData:receivedData];
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                /*
                 [spinner stopAnimating];
                 [spinner removeFromSuperview];
-                imageView.image = image;
+                */
                 
-                //Store image to tmp for later use
-                [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+                if (image)
+                {
+                    if (imageView)
+                        imageView.image = image;
+                    
+                    returnSize = image.size;
+                    
+                    //Store image to tmp for later use
+                    [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+                    
+                    if (isUserInteractionenabled)
+                        imageView.userInteractionEnabled = YES;
+                }
             });
             
         });
         /************/
     }
+    
+    return returnSize;
 }
 
 @end

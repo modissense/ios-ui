@@ -12,6 +12,8 @@
 
 @property (strong,nonatomic) NSString* userId;
 @property (strong,nonatomic) NSString* userName;
+@property (strong,nonatomic) NSString* avatarURL;
+@property (strong,nonatomic) NSString* mainAccount;
 @property (strong,nonatomic) NSMutableArray* socialAccounts;
 
 //Arrays of Friend objects

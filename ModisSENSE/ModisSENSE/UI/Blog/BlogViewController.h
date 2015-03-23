@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BlogEngine.h"
+#import "FlatDatePicker.h"
 
-@interface BlogViewController : UITableViewController <BlogEngineDelegate>
+@interface BlogViewController : UITableViewController <BlogEngineDelegate,FlatDatePickerDelegate>
+
+@property (nonatomic, strong) FlatDatePicker *flatDatePicker;
 
 @end

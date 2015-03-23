@@ -12,5 +12,6 @@
 
 @property (strong,nonatomic) NSString* friendId;
 @property (strong,nonatomic) NSString* name;
+@property (strong,nonatomic) NSString* avatarImgURL;
 
 @end

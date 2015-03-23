@@ -22,7 +22,14 @@
 {
     [super viewDidLoad];
     
+    //For ios7
+    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7)
+        ADJUST_IOS7_LAYOUT
+    
     self.title = L(DUPLICATEPOIS);
+    
+    UIImageView* bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mapblur"]];
+    self.tableView.backgroundView = bgView;
 
 }
 
@@ -67,9 +74,19 @@
         
         cell.imageView.image = [UIImage imageNamed:@"target"];
         cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.text = duplicatePOI.name;
+        
+        NSString* name = duplicatePOI.name;
+        if (name==nil || [name isKindOfClass:[NSNull class]] || [name isEqualToString:@"null"] || name.length==0)
+            name = L(NONAME);
+        
+        cell.textLabel.text = name;
         cell.textLabel.textColor = [UIColor blackColor];
-        cell.detailTextLabel.text = duplicatePOI.description;
+        
+        NSString* comment = duplicatePOI.comment;
+        if (comment==nil || [comment isKindOfClass:[NSNull class]] || [comment isEqualToString:@"null"] || comment.length==0)
+            comment = L(NODESCRIPTION);
+        
+        cell.detailTextLabel.text = comment;
         cell.accessoryType = 0;
         
         cell.textLabel.font = CELLFONT;
@@ -111,7 +128,6 @@
     if (indexPath.section==1)
     {
         MapResultsViewController *mapResultsVC =[self.storyboard instantiateViewControllerWithIdentifier:@"MapResultsViewID"];
-        mapResultsVC.showTrajectory = NO;
         mapResultsVC.pointsOfInterest = self.duplicatesList;
         [self.navigationController pushViewController:mapResultsVC animated:YES];
     }

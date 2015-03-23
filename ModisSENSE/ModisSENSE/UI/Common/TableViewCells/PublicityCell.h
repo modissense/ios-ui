@@ -22,4 +22,6 @@
 @property (nonatomic, strong) Publicity *publicity;
 @property (weak) IBOutlet id <PublicityCellDelegate> delegate;
 
+-(void)setPickerRow:(int)row;
+
 @end

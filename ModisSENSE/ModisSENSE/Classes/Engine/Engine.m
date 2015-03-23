@@ -37,7 +37,6 @@ static Engine *_sharedInstance = nil;
         
         //Initialize the user model
         self.user = [[User alloc] init];
-        
     }
     
     return self;

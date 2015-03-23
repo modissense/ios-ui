@@ -25,14 +25,26 @@
 {
     [super viewDidLoad];
     
+    //For ios7
+    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7)
+        ADJUST_IOS7_LAYOUT
+        
+    UIImageView* bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mapblur"]];
+    self.tableView.backgroundView = bgView;
+    
     self.title = L(SETTINGS);
+    
+    self.newSocialMediaLoaded = NO;
     
     socialMedia = [[NSArray alloc] initWithObjects:@"Twitter", @"Facebook", @"Foursquare", nil];
     
     selectedMedia = [[NSMutableDictionary alloc] init];
     
     //Retrieve connected accounts from service
-    [self getConnectedAccounts];
+    if (Eng.user.socialAccounts == nil)
+        [self getConnectedAccounts];
+    else
+        [self gotConnectedAccounts];
 }
 
 
@@ -79,6 +91,10 @@
             cell = [[SwitchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
+        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transpbg"]];
+        cell.backgroundView.alpha = CELLALPHA;
+        
         cell.delegate = self;
         cell.textString = L(TRACK_POSITION);
         cell.switchState = Eng.preferences.trackUserPosition;
@@ -95,6 +111,10 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
+        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transpbg"]];
+        cell.backgroundView.alpha = CELLALPHA;
+        
         cell.textLabel.font = CELLFONT;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -105,54 +125,96 @@
         }
         else
         {
+            NSString* mainSocial = [socialMedia objectAtIndex:row-1];
+            mainSocial = [mainSocial lowercaseString];
+            
             switch (row) {
                 case 1:
                     
-                    if ([(NSNumber*)[selectedMedia objectForKey:TWITTER] boolValue])
+                    cell.imageView.image = [UIImage imageNamed:@"twitter_login"];
+                    
+                    //Check if this is the main account
+                    if ([Eng.user.mainAccount isEqualToString:mainSocial])
                     {
                         cell.textLabel.text = [socialMedia objectAtIndex:row-1];
-                        cell.imageView.image = [UIImage imageNamed:@"checkmark-checked"];
-                        UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"remove"]];
+                        UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"user"]];
                         cell.accessoryView = imageView;
                     }
                     else
                     {
-                        cell.textLabel.text = [socialMedia objectAtIndex:row-1];
-                        cell.imageView.image = [UIImage imageNamed:@"add"];
+                        if ([(NSNumber*)[selectedMedia objectForKey:TWITTER] boolValue])
+                        {
+                            cell.textLabel.text = [socialMedia objectAtIndex:row-1];
+                            UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"remove"]];
+                            cell.accessoryView = imageView;
+                        }
+                        else
+                        {
+                            cell.textLabel.text = [socialMedia objectAtIndex:row-1];
+                            
+                            UIImageView* check = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"red_add"]];
+                            cell.accessoryView = check;
+                        }
                     }
                     
                     break;
                     
                 case 2:
                     
-                    if ([(NSNumber*)[selectedMedia objectForKey:FACEBOOK] boolValue])
+                    cell.imageView.image = [UIImage imageNamed:@"facebook_login"];
+                    
+                    //Check if this is the main account
+                    if ([Eng.user.mainAccount isEqualToString:mainSocial])
                     {
                         cell.textLabel.text = [socialMedia objectAtIndex:row-1];
-                        cell.imageView.image = [UIImage imageNamed:@"checkmark-checked"];
-                        UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"remove"]];
+                        UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"user"]];
                         cell.accessoryView = imageView;
                     }
                     else
                     {
-                        cell.textLabel.text = [socialMedia objectAtIndex:row-1];
-                        cell.imageView.image = [UIImage imageNamed:@"add"];
+                        if ([(NSNumber*)[selectedMedia objectForKey:FACEBOOK] boolValue])
+                        {
+                            cell.textLabel.text = [socialMedia objectAtIndex:row-1];
+                            UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"remove"]];
+                            cell.accessoryView = imageView;
+                        }
+                        else
+                        {
+                            cell.textLabel.text = [socialMedia objectAtIndex:row-1];
+                            
+                            UIImageView* check = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"red_add"]];
+                            cell.accessoryView = check;
+                        }
                     }
                     
                     break;
                     
                 case 3:
                     
-                    if ([(NSNumber*)[selectedMedia objectForKey:FOURSQUARE] boolValue])
+                    cell.imageView.image = [UIImage imageNamed:@"foursquare_login"];
+                    
+                    //Check if this is the main account
+                    if ([Eng.user.mainAccount isEqualToString:mainSocial])
                     {
                         cell.textLabel.text = [socialMedia objectAtIndex:row-1];
-                        cell.imageView.image = [UIImage imageNamed:@"checkmark-checked"];
-                        UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"remove"]];
+                        UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"user"]];
                         cell.accessoryView = imageView;
                     }
                     else
                     {
-                        cell.textLabel.text = [socialMedia objectAtIndex:row-1];
-                        cell.imageView.image = [UIImage imageNamed:@"add"];
+                        if ([(NSNumber*)[selectedMedia objectForKey:FOURSQUARE] boolValue])
+                        {
+                            cell.textLabel.text = [socialMedia objectAtIndex:row-1];
+                            UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"remove"]];
+                            cell.accessoryView = imageView;
+                        }
+                        else
+                        {
+                            cell.textLabel.text = [socialMedia objectAtIndex:row-1];
+                            
+                            UIImageView* check = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"red_add"]];
+                            cell.accessoryView = check;
+                        }
                     }
                     
                     break;
@@ -175,69 +237,158 @@
     if (indexPath.section==1)
     {
         NSUInteger row = indexPath.row;
-    
-        if (row==0)     //Connected accounts
-        {
-//            //Select all
-//            for (int i=0;i<socialMedia.count;i++)
-//            {
-//                [selectedMedia setObject:[NSNumber numberWithBool:YES] forKey:[socialMedia objectAtIndex:i]];
-//            }
-        }
-        else
-        {
-            switch (row) {
-                    
-                case 1:
-                    
-                    if ([(NSNumber*)[selectedMedia objectForKey:TWITTER] boolValue])    //Remove social media
-                    {
-                        //Remove social account code here
-                    }
-                    else                                                                //Add social media
-                    {
-                        UserEngine* userEng = [[UserEngine alloc] init];
-                        [userEng connectWithSocialMedia:TWITTER userid:Eng.user.userId];
-                    }
-                    
-                    break;
-                    
-                case 2:
-                    
-                    if ([(NSNumber*)[selectedMedia objectForKey:FACEBOOK] boolValue])    //Remove social media
-                    {
-                        //Remove social account code here
-                    }
-                    else                                                                 //Add social media
-                    {
-                        UserEngine* userEng = [[UserEngine alloc] init];
-                        [userEng connectWithSocialMedia:FACEBOOK userid:Eng.user.userId];
-                    }
-                    
-                    break;
-                    
-                case 3:
-                    
-                    if ([(NSNumber*)[selectedMedia objectForKey:FOURSQUARE] boolValue])    //Remove social mediat
-                    {
-                        //Remove social account code here
-                    }
-                    else                                                                   //Add social media
-                    {
-                        UserEngine* userEng = [[UserEngine alloc] init];
-                        [userEng connectWithSocialMedia:FOURSQUARE userid:Eng.user.userId];
-                    }
-                    
-                    break;
-                    
-                default:
-                    break;
-            }
-            
+        
+        NSString* mainSocial = [socialMedia objectAtIndex:row-1];
+        mainSocial = [mainSocial lowercaseString];
+        
+        switch (row) {
+                
+            case 1:
+                
+                if ([(NSNumber*)[selectedMedia objectForKey:TWITTER] boolValue])    //Remove social media
+                {
+                    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:L(REMOVETWITTER)
+                                                                        message:L(AREYOUSURE)
+                                                                       delegate:self
+                                                              cancelButtonTitle:L(NO)
+                                                              otherButtonTitles:L(YES), nil];
+                    alertView.tag = row;
+                    [alertView show];
+                }
+                else                                                                //Add social media
+                {
+                    UserEngine* userEng = [[UserEngine alloc] init];
+                    [userEng connectWithSocialMedia:TWITTER userid:Eng.user.userId];
+                }
+                
+                break;
+                
+            case 2:
+                
+                if ([(NSNumber*)[selectedMedia objectForKey:FACEBOOK] boolValue])    //Remove social media
+                {
+                    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:L(REMOVEFACEBOOK)
+                                                                        message:L(AREYOUSURE)
+                                                                       delegate:self
+                                                              cancelButtonTitle:L(NO)
+                                                              otherButtonTitles:L(YES), nil];
+                    alertView.tag = row;
+                    [alertView show];
+                }
+                else                                                                 //Add social media
+                {
+                    UserEngine* userEng = [[UserEngine alloc] init];
+                    [userEng connectWithSocialMedia:FACEBOOK userid:Eng.user.userId];
+                }
+                
+                break;
+                
+            case 3:
+                
+                if ([(NSNumber*)[selectedMedia objectForKey:FOURSQUARE] boolValue])    //Remove social mediat
+                {
+                    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:L(REMOVEFOURSQUARE)
+                                                                        message:L(AREYOUSURE)
+                                                                       delegate:self
+                                                              cancelButtonTitle:L(NO)
+                                                              otherButtonTitles:L(YES), nil];
+                    alertView.tag = row;
+                    [alertView show];
+                }
+                else                                                                   //Add social media
+                {
+                    UserEngine* userEng = [[UserEngine alloc] init];
+                    [userEng connectWithSocialMedia:FOURSQUARE userid:Eng.user.userId];
+                }
+                
+                break;
+                
+            default:
+                break;
         }
     }
     
     [self.tableView reloadData];
+}
+
+
+
+#pragma mark - AlertView delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex==1)
+    {
+        NSString* mainSocial = [socialMedia objectAtIndex:alertView.tag-1];
+        mainSocial = [mainSocial lowercaseString];
+        
+        switch (alertView.tag-1) {
+            case 0:
+                
+                //Check if this is the main account. Cannot delete main account
+                if (![Eng.user.mainAccount isEqualToString:mainSocial])
+                {
+                    UserEngine* userEng = [[UserEngine alloc] init];
+                    userEng.delegate = self;
+                    [userEng removeSocialAccount:TWITTER];
+                }
+                else
+                {
+                    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                        message:L(CANNOTDELETEMAINACCOUNT)
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                    [alertView show];
+                }
+                
+                break;
+                
+            case 1:
+                
+                //Check if this is the main account. Cannot delete main account
+                if (![Eng.user.mainAccount isEqualToString:mainSocial])
+                {
+                    UserEngine* userEng = [[UserEngine alloc] init];
+                    userEng.delegate = self;
+                    [userEng removeSocialAccount:FACEBOOK];
+                }
+                else
+                {
+                    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                        message:L(CANNOTDELETEMAINACCOUNT)
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                    [alertView show];
+                }
+                
+                break;
+                
+            case 2:
+                
+                //Check if this is the main account. Cannot delete main account
+                if (![Eng.user.mainAccount isEqualToString:mainSocial])
+                {
+                    UserEngine* userEng = [[UserEngine alloc] init];
+                    userEng.delegate = self;
+                    [userEng removeSocialAccount:FOURSQUARE];
+                }
+                else
+                {
+                    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                        message:L(CANNOTDELETEMAINACCOUNT)
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                    [alertView show];
+                }
+                
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 
@@ -259,6 +410,63 @@
         [Eng.locationTracker startLocationTracker:TRACINGBLOG];
         MyLog(@"ModisSENSE location tracker re-activated !\n\n");
     }
+    
+    [self showTrackingLabelWithState:state];
+}
+
+
+-(void) showTrackingLabelWithState:(BOOL)state {
+    
+    UILabel *infoLabel;
+    infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 30, self.view.frame.size.width,15)];
+    infoLabel.backgroundColor = [UIColor clearColor];
+    infoLabel.numberOfLines = 0;
+    infoLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    infoLabel.textAlignment = NSTextAlignmentCenter;
+    infoLabel.textColor = [UIColor blackColor];
+    infoLabel.font = [UIFont systemFontOfSize:13];
+    infoLabel.alpha = 0.0;
+    
+    if (state)
+        infoLabel.text = L(POSITIONTRACKINGACTIVATED);
+    else
+        infoLabel.text = L(POSITIONTRACKINGDEACTIVATED);
+    
+    [self.view addSubview:infoLabel];
+    
+    [self.view bringSubviewToFront:infoLabel];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        infoLabel.layer.opacity = 1.0;
+    } completion:^(BOOL finished){
+        [UIView animateWithDuration:2.0 animations:^{
+            infoLabel.layer.opacity = 0.0;
+        } completion:^(BOOL finished){
+            [infoLabel removeFromSuperview];
+        }];
+    }];
+}
+
+
+#pragma mark - Social account removal delegate
+
+- (void)accountRemoved {
+    [self getFriends];
+}
+
+
+#pragma mark - Get friends call & delegate
+
+- (void)getFriends {
+    
+    UserEngine* userEng = [[UserEngine alloc] init];
+    userEng.delegate=self;
+    [userEng getFriendsForUser:Eng.user.userId showLoader:YES];
+}
+
+//Delegate
+- (void)gotFriends {
+    [self getConnectedAccounts];
 }
 
 
@@ -271,34 +479,46 @@
     [userEng getConnectedAccountsFromUser:Eng.user.userId];
 }
 
+
 //Delegate
 //Set selected media to show on table
 - (void)gotConnectedAccounts {
     
     NSLog(@"Connected accounts:");
     
-    for (int i=0; i<Eng.user.socialAccounts.count ; i++)
+    if (Eng.user.socialAccounts.count==0)
     {
-        if ([[Eng.user.socialAccounts objectAtIndex:i] isEqualToString:TWITTER])
-        {
-            [selectedMedia setObject:[NSNumber numberWithBool:YES] forKey:TWITTER];
-            NSLog(TWITTER);
-        }
-        
-        if ([[Eng.user.socialAccounts objectAtIndex:i] isEqualToString:FACEBOOK])
-        {
-            [selectedMedia setObject:[NSNumber numberWithBool:YES] forKey:FACEBOOK];
-            NSLog(FACEBOOK);
-        }
-        
-        if ([[Eng.user.socialAccounts objectAtIndex:i] isEqualToString:FOURSQUARE])
-        {
-            [selectedMedia setObject:[NSNumber numberWithBool:YES] forKey:FOURSQUARE];
-            NSLog(FOURSQUARE);
-        }
+        [self dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
+    
+    if (selectedMedia)
+        [selectedMedia removeAllObjects];
+
+    if ([Eng.user.socialAccounts indexOfObject:TWITTER] != NSNotFound) {
+        [selectedMedia setObject:[NSNumber numberWithBool:YES] forKey:TWITTER];
+        NSLog(TWITTER);
+    }
+    
+    if ([Eng.user.socialAccounts indexOfObject:FACEBOOK] != NSNotFound) {
+        [selectedMedia setObject:[NSNumber numberWithBool:YES] forKey:FACEBOOK];
+        NSLog(FACEBOOK);
+    }
+    
+    if ([Eng.user.socialAccounts indexOfObject:FOURSQUARE] != NSNotFound) {
+        [selectedMedia setObject:[NSNumber numberWithBool:YES] forKey:FOURSQUARE];
+        NSLog(FOURSQUARE);
     }
     
     [self.tableView reloadData];
+    
+    if (self.newSocialMediaLoaded)
+    {
+        //Refresh friends
+        UserEngine* userEng = [[UserEngine alloc] init];
+        [userEng getFriendsForUser:Eng.user.userId showLoader:YES];
+        self.newSocialMediaLoaded = NO;
+    }
 }
 
 @end

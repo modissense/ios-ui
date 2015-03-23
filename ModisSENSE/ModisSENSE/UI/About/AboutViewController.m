@@ -18,18 +18,22 @@
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    //For ios7
-    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7)
-        ADJUST_IOS7_LAYOUT
+//    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+}
+
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 }
 
 
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+//    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 }
 
 
@@ -39,6 +43,12 @@
 	// Do any additional setup after loading the view.
     
     self.title = L(ABOUT);
+    
+    //For ios7
+    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7)
+        ADJUST_IOS7_LAYOUT
+    
+    self.aboutLabel.text = L(ABOUTMODISSENSE);
     
     self.aboutTextView.text = L(ABOUTTEXT);
     

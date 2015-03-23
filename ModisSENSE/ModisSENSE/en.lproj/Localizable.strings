@@ -13,14 +13,110 @@
 // Common
 /*******************************************************/
 
+/* Noon */
+"NOON" = "Noon";
+
+/* Position tracking activated */
+"POSITIONTRACKINGACTIVATED" = "Position tracking activated";
+
+/* Position tracking deactivated */
+"POSITIONTRACKINGDEACTIVATED" = "Position tracking deactivated";
+
+/* Wait */
+"WAIT" = "Wait..";
+
+/* Visualise */
+"VISUALIZE" = "Visualise";
+
+/* Visitors */
+"VISITORS" = "visitors";
+
+/* Visitor */
+"VISITOR" = "visitor";
+
+/* Visits */
+"VISITS" = "visits";
+
+/* Visits */
+"VISIT" = "visit";
+
+/* What your friends think */
+"WHATYOURFRIENDSTHINK" = "What your friends think";
+
+/* Comments */
+"COMMENTS" = "comments";
+
+/* Comment */
+"COMMENT" = "comment";
+
+/* Close */
+"CLOSE" = "Close";
+
+/* Results */
+"RESULTS" = "Results";
+
+/* % of results found */
+"RESULTSFOUND" = "results found";
+
+/* Are you sure */
+"AREYOUSURE" = "Are you sure?";
+
+/* Pull down to refresh or search */
+"PULLDOWNTOREFRESHORSEARCH" = "Pull down to refresh or search";
+
+/* % of nearest pois found */
+"NEARESTPOISFOUND" = "nearest points of interest found";
+
+/* You are not connected with this social account */
+"NOTCONNECTEDTOSOCIALACCOUNT" = "You are not connected with this social account";
+
+/* Share */
+"SHAREBLOG" = "Share";
+
+/* Blog shared */
+"BLOGSHARED" = "Blog shared";
+
+/* successful shares */
+"SUCCESSFULSHARES" = "successful shares";
+
+/* successful share */
+"SUCCESSFULSHARE" = "successful share";
+
+/* Select at least one social media */
+"SELECTONESOCIAL" = "Select at least one social media";
+
+/* Send */
+"SEND" = "Send";
+
 /* Done */
 "DONE" = "Done";
+
+/* meters */
+"METERS" = "meters";
+
+/* km */
+"KM" = "km";
+
+/* Select */
+"SELECT" = "Select";
+
+/* Hint */
+"HINT" = "Hint";
+
+/* More */
+"MORE" = "More";
 
 /* Hour */
 "HOUR" = "hour";
 
 /* Hours */
 "HOURS" = "hours";
+
+/* Minutes */
+"MINUTES" = "minutes";
+
+/* Minute */
+"MINUTE" = "minute";
 
 /* Point of interest */
 "POI" = "Point of interest";
@@ -30,6 +126,9 @@
 
 /* Edit */
 "EDIT" = "Edit";
+
+/* Show info */
+"SHOWINFO" = "Show information";
 
 /* Delete */
 "DELETE" = "Delete";
@@ -59,7 +158,7 @@
 "CONNECTIONERROR" = "Connection Error";
 
 /* Retrieving address */
-"RETRIEVINGADDRESS" = "Retrieving address";
+"RETRIEVINGADDRESS" = "Retrieving address..";
 
 /* Caution */
 "CAUTION" = "Caution";
@@ -76,8 +175,14 @@
 /* Signing Out */
 "SIGNINGOUT" = "Signing Out";
 
+/* Removing account */
+"REMOVINGACCOUNT" = "Removing account";
+
 /* About */
 "ABOUT" = "About";
+
+/* About ModisSENSE */
+"ABOUTMODISSENSE" = "About ModisSENSE";
 
 /* Results */
 "RESULTS" = "Results";
@@ -98,13 +203,85 @@
 "GOTIT" = "Got it";
 
 /* No location services detected */
-"NOLOCATIONSERVICES" = "Location services are not enabled";
+"NOLOCATIONSERVICES" = "Location services are not enabled. Enable them on your phone's settings.";
 
 /* Failed */
 "FAILED" = "Failed";
 
 /* History */
 "HISTORY" = "History";
+
+/* Name */
+"NAME" = "Name";
+
+/* Duration */
+"DURATION" = "Duration";
+
+/* Edit Duration */
+"CHANGEDURATION" = "Change duration";
+
+/* Check Duration */
+"CHECKDURATION" = "Check the duration";
+
+/* Change activity */
+"CHANGEACTIVITY" = "Change activity";
+
+/* Activity */
+"ACTIVITY" = "Activity";
+
+/* Update */
+"UPDATE" = "Update";
+
+/* Updated */
+"UPDATED" = "Updated";
+
+/* Save changes */
+"SAVECHANGES" = "Save changes";
+
+/* Share */
+"SHARE" = "Share";
+
+/* Locations */
+"LOCATIONS" = "locations";
+
+/* Zoom in to see them */
+"ZOOMINTOSEETHEM" = "Zoom in to see them";
+
+/* No address available */
+"NOADDRESSAVAILABLE" = "No address available";
+
+/* Getting address */
+"GETTINGADDRESS" = "Getting address..";
+
+/* Getting directions */
+"GETTINGDIRECTIONS" = "Calculating directions";
+
+/* Could not get directions */
+"COULDNOTGETDIRECTIONS" = "Could not get directions";
+
+/* Swipe left to delete */
+"SWIPELEFTTODELETE" = "Swipe left to delete";
+
+/* No description */
+"NODESCRIPTION" = "No description available";
+
+/* No description available */
+"NODESCRIPTIONAVAILABLE" = "No description available";
+
+/* No name available */
+"NONAME" = "Name Uknown";
+
+/* No active e-mail account in device */
+"NOACTIVEMAILACCOUNT" = "No active e-mail account in device";
+
+/* Thank you */
+"THANKYOU" = "Thank you";
+
+/* Time table */
+"TIMETABLE" = "Time table";
+
+/* No frends selected for current time period */
+"NOFRIENDSSELECTED" = "No friends selected for the provided time period";
 
 
 /*******************************************************/
@@ -118,6 +295,10 @@
 "SELECTLOCATION" = "Select Location";
 
 
+/* Could not get location. Try zooming closer */
+"TRYZOOMINGCLOSER" = "Could not get location. Try again.";
+
+
 
 /*******************************************************/
 // Home View Controller
@@ -125,6 +306,21 @@
 
 /* Navigation bar title */
 "HOME" = "Home";
+
+/* Show trends */
+"SHOWTRENDS" = "Show trends";
+
+/* Trending */
+"TRENDING" = "Trending";
+
+/* Trending now */
+"TRENDINGNOW" = "Trending now";
+
+/* Getting trends */
+"GETTINGTRENDS" = "Getting trends";
+
+/* Nothing is trending */
+"NOTHINGTRENDING" = "Nothing is trending in this area";
 
 /* Map */
 "MAP" = "Map";
@@ -138,11 +334,23 @@
 /* Add new location */
 "ADDNEW" = "Add new";
 
+/* How to add new POI */
+"HOWTOADDNEWPOI" = "You can add a new point of interest by long pressing the location on the map you are interested in";
+
 
 
 /*******************************************************/
 // Home Settings View Controller
 /*******************************************************/
+
+/* Remove Twitter */
+"REMOVETWITTER" = "Remove Twitter";
+
+/* Remove Facebook */
+"REMOVEFACEBOOK" = "Remove Facebook";
+
+/* Remove Foursquare */
+"REMOVEFOURSQUARE" = "Remove Foursquare";
 
 /* Show user's current location on map */
 "SHOW_CURRENT_LOCATION" = "Show current location";
@@ -159,6 +367,9 @@
 /* Filter by friends */
 "FRIENDSFILTER" = "Filter with friends";
 
+/* Can not delete main account */
+"CANNOTDELETEMAINACCOUNT" = "This is your main account. If you want to delete your account go to the Profile section.";
+
 
 
 /*******************************************************/
@@ -167,6 +378,9 @@
 
 /* Show user's current location on map */
 "GETTINGFRIENDS" = "Getting friends";
+
+/* Friend */
+"FRIEND" = "Friend";
 
 /* Friends */
 "FRIENDS" = "Friends";
@@ -177,7 +391,10 @@
 /* You have no friends */
 "NOFRIENDSAVAILABLE" = "No friends available";
 
-/*Pull to refresh friends */
+/* Pull to refresh */
+"PULLTOREFRESH" = "Pull to refresh";
+
+/* Pull to refresh friends */
 "PULLTOREFRESHFRIENDS" = "Pull to refresh friends";
 
 /* Select all twitter friends */
@@ -201,14 +418,25 @@
 /* Empty all selections */
 "EMPTYSELECTIONS" = "Empty all selections";
 
+/* Select Twitter friends */
+"SELECTTWITTERFRIENDS" = "Select Twitter friends";
+
+/* Select Facebook friends */
+"SELECTFACEBOOKFRIENDS" = "Select Facebook friends";
+
+/* Select Foursquare friends */
+"SELECTFOURSQUAREFRIENDS" = "Select Foursquare friends";
+
 
 /*******************************************************/
-// Post To Social View Controller
+// Post To Social
 /*******************************************************/
 
 /* Post button */
 "POST" = "Post";
 
+/* Add more social media to your account in order to share */
+"ADDMORESOCIALACCOUNTS" = "Sharing is currently available for Twitter or Facebook. Add more social accounts in your application settings.";
 
 
 /*******************************************************/
@@ -248,6 +476,12 @@
 /* Interest */
 "INTEREST" = "Interesting";
 
+/* Hot poi */
+"HOTPOI" = "Hot point";
+
+/* Interesting poi */
+"INTERESTINGPOI" = "Interesting point";
+
 /* Number of results */
 "NUMBEROFRESULTS" = "Number of results";
 
@@ -264,7 +498,7 @@
 "SELECTSEARCHAREA" = "Please select search area";
 
 /* Map area selected with center:  */
-"MAPAREASELECTED" = "Map area selected with center: ";
+"MAPAREASELECTED" = "Map area selected";
 
 /* Check your date order */
 "CHECKDATEORDER" = "Check your date order";
@@ -284,7 +518,10 @@
 "BLOGS" = "Blogs";
 
 /* Trajectory */
-"GETTRAJECTORY" = "Get Trajectory";
+"TRAJECTORY" = "Trajectory";
+
+/* View Trajectory */
+"VIEWTRAJECTORY" = "View Trajectory";
 
 /* Getting Blogs */
 "GETTINGBLOGS" = "Getting Blogs";
@@ -302,6 +539,9 @@
 
 /* Blog */
 "BLOG" = "Blog";
+
+/* Trajectory */
+"TRAJECTORY" = "Trajectory";
 
 /* Blog name */
 "BLOG_NAME" = "Name";
@@ -329,6 +569,33 @@
 
 /* You are not authorized for this action */
 "NOTAUTHORIZEDFORTHISACTION" = "You are not authorized for this action";
+
+/* You don't own this point of interest */
+"NOTOWNINGPOI" = "You don't own this point of interest";
+
+/* Add a new visit */
+"ADDANEWVISIT" = "Add a new visit";
+
+/* Add a blog day */
+"ADDANEWBLOGDAY" = "Add a blog day";
+
+/* Select a location from the map */
+"SELECTLOCATIONFROMMAP" = "Select a location from the map";
+
+/* No keywords available */
+"NOKEYWORDSAVAILABLE" = "No keywords available";
+
+/* Sharing blog */
+"SHARINGBLOG" = "Sharing blog";
+
+/* Show blog day activity */
+"SHOWSTORY" = "Show day activity";
+
+/* Don't show this again */
+"DONTSHOWAGAIN" = "Don't show";
+
+/* Could not get coordinates, please try again */
+"COULDNOTGETCOORDINATES" = "Could not get coordinates, please try again";
 
 
 
@@ -405,6 +672,9 @@
 /* Updating POI */
 "UPDATINGPOI" = "Updating point of interest";
 
+/* Updating blog */
+"UPDATINGBLOG" = "Updating blog";
+
 /* If you like a place tell us about it */
 "TELLUSABOUTIT" = "If you like a place\nThis is where you tell us about it";
 
@@ -428,6 +698,19 @@
 
 /* See them on a mao */
 "SEETHEMONAMAP" = "See them on a map";
+
+/* Show trajectory on map */
+"SHOWTRAJECTORYONMAP" = "Show trajectory on map";
+
+/* Adding new visit */
+"ADDINGNEWVISIT" = "Adding new visit";
+
+/* Add a new blog date */
+"ADDNEWBLOGDATE" = "Add a new blog date";
+
+/* Delete poi from trajectory */
+"DELETEBLOGPOI" = "Remove from trajectory";
+
 
 /*******************************************************/
 // Settings View Controller
@@ -469,6 +752,12 @@
 /* Delete account */
 "DELETE_ACCOUNT" = "Delete Account";
 
+/* Account deleted */
+"ACCOUNT_DELETED" = "Account deleted";
+
+/* All connected social accoutns will be removed */
+"ACCOUNTSWILLBEREMOVED" = "All connected social accounts will be removed. Are you sure?";
+
 /* Sign out */
 "SIGN_OUT" = "Sign out";
 
@@ -499,4 +788,14 @@
 "SIGNINWITHYOURSOCIALACCOUNT" = "Sign in with your Social Account";
 
 
+
+/*******************************************************/
+// Selectable Map View Controller
+/*******************************************************/
+
+/* Selectable map info */
+"SELECTABLEMAPINFO" = "Select the point of interest that you're interested in otherwise press the add new button to enter a new one";
+
+/* New visit added */
+"MEWVISITADDED" = "New visit added";
 

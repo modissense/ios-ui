@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>386CEA41-7301-4794-A0D4-918CDEF9C4AD</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ModisSENSE</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>a9f7f25d-3fa3-2d47-a6f8-a86f04cfdf79++4262</key>
+		<string>https://hestia.atc.gr/svn-modissense/trunk/iPhone/ModisSENSE</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ModisSENSE.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>a9f7f25d-3fa3-2d47-a6f8-a86f04cfdf79++4262</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>a9f7f25d-3fa3-2d47-a6f8-a86f04cfdf79++4262</key>
+		<string>https://hestia.atc.gr/svn-modissense</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://hestia.atc.gr/svn-modissense/trunk/iPhone/ModisSENSE/ModisSENSE.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>a9f7f25d-3fa3-2d47-a6f8-a86f04cfdf79++4262</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>a9f7f25d-3fa3-2d47-a6f8-a86f04cfdf79++4262</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ModisSENSE</string>
+		</dict>
+	</array>
+</dict>
+</plist>

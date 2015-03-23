@@ -12,7 +12,7 @@
 @protocol UserSelectionDelegate <NSObject>
 
 @optional
--(void)updateSelectedUsers;
+-(void)friendsSelected;
 @end
 
 @interface UserSelectionViewController : UITableViewController <UserEngineDelegate>
