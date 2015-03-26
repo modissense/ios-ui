@@ -10,36 +10,31 @@
 	<string>ModisSENSE</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>a9f7f25d-3fa3-2d47-a6f8-a86f04cfdf79++4262</key>
-		<string>https://hestia.atc.gr/svn-modissense/trunk/iPhone/ModisSENSE</string>
+		<key>EE2D14806C85F77C0D0D2F4636BCC021EB90A249</key>
+		<string>https://github.com/modissense/ios-ui.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ModisSENSE.xcodeproj</string>
+	<string>ModisSENSE/ModisSENSE.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>a9f7f25d-3fa3-2d47-a6f8-a86f04cfdf79++4262</key>
-		<string>../..</string>
-	</dict>
-	<key>IDESourceControlProjectRepositoryRootDictionary</key>
-	<dict>
-		<key>a9f7f25d-3fa3-2d47-a6f8-a86f04cfdf79++4262</key>
-		<string>https://hestia.atc.gr/svn-modissense</string>
+		<key>EE2D14806C85F77C0D0D2F4636BCC021EB90A249</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://hestia.atc.gr/svn-modissense/trunk/iPhone/ModisSENSE/ModisSENSE.xcodeproj</string>
+	<string>https://github.com/modissense/ios-ui.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>a9f7f25d-3fa3-2d47-a6f8-a86f04cfdf79++4262</string>
+	<string>EE2D14806C85F77C0D0D2F4636BCC021EB90A249</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.subversion</string>
+			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>a9f7f25d-3fa3-2d47-a6f8-a86f04cfdf79++4262</string>
+			<string>EE2D14806C85F77C0D0D2F4636BCC021EB90A249</string>
 			<key>IDESourceControlWCCName</key>
-			<string>ModisSENSE</string>
+			<string>ModisSENSE%20Github</string>
 		</dict>
 	</array>
 </dict>
