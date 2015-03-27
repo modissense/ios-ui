@@ -9,7 +9,7 @@ The application integrates with the ModisSENSE platform using REST API.
 * Log in with you preferred social account [Twitter, Facebook, LinkedIn]
 * Get nearest points of interest based on your location
 * Get trending points of interest based on map region
-* Get points of interest based on search criteria (e.g. keyword search, search area, start-end date, 
+* Get points of interest based on search criteria (e.g. keyword search, search area, start-end date, popularity or interest, selected friends)
 * Get nearest points of interest based on selected social friends
 * Map clusters close points of interest according to zoom level
 * Add manually a point of interest and flag it as public or private (for your eyes only)
