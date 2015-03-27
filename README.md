@@ -18,9 +18,9 @@ The application integrates with the ModisSENSE platform using REST API.
 * View and edit information for a specific point of interest
 * View ratings for a specific point of interest based on popularity or interest of social friends or general public
 * View user's history of visited points of interest sorted by date (Blogs)
-* History (blogs) includes visited places, visit duration of each place
+* History (blogs) includes visited places, activity description and visit duration of each place
 * View history on map with visited places, actual trajectory and time table for each day
-* Edit your history (Blog) i.e reorder visited places, delete or add more to your trajectory
+* Edit your history (Blog) i.e reorder visited places, delete or add more to your trajectory, change activity or duration during visit at the specified place
 * Share your history (Blog) to all, or user selected, connected social media
 * Delete your account
 
