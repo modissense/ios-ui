@@ -271,6 +271,12 @@
 /* No name available */
 "NONAME" = "Name Uknown";
 
+/* No comment available */
+"NOCOMMENT" = "No comments available";
+
+/* No user has comments */
+"NOUSERCOMMENTS" = "No user has comments";
+
 /* No active e-mail account in device */
 "NOACTIVEMAILACCOUNT" = "No active e-mail account in device";
 

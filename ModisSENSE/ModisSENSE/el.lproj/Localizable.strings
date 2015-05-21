@@ -271,6 +271,12 @@
 /* No name available */
 "NONAME" = "Άγνωστο Όνομα";
 
+/* No comment available */
+"NOCOMMENT" = "Δεν υπάρχουν σχόλια";
+
+/* No user has comments */
+"NOUSERCOMMENTS" = "Κανένας χρήστης δεν έχει σχόλια";
+
 /* No active e-mail account in device */
 "NOACTIVEMAILACCOUNT" = "Δεν υπάρχει έγκυρος λογαριασμός e-mail στη συσκευή";
 

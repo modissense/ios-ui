@@ -574,6 +574,7 @@
 -(void)gotPOIDetails:(POIDetails*)poiDetails {
     
     [self.poiDetailsView setPOIDetails:poiDetails withLocation:currentLocationShowing];
+    
 }
 
 #pragma mark - POI deails View show/hide

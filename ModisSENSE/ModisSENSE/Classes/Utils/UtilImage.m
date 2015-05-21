@@ -11,7 +11,7 @@
 
 @implementation UtilImage
 
-+(CGSize) getImageDimensionsFromURL:(NSString*)url {
++(void) getImageDimensionsFromURL:(NSString*)url {
     return [self loadAsyncImage:nil fromURL:url withDefaultImage:nil];
 }
 
@@ -19,7 +19,11 @@
     [self loadAsyncImage:imageView fromURL:url withDefaultImage:@""];
 }
 
-+(CGSize) loadAsyncImage: (UIImageView *)imageView fromURL:(NSString *)url withDefaultImage:(NSString *)defaultImage {
++(void) loadAsyncImage: (UIImageView *)imageView fromURL:(NSString *)url withDefaultImage:(NSString *)defaultImage {
+    
+    if (url==nil || [url isKindOfClass:[NSNull class]] || [url isEqualToString:@""]) {
+        return;
+    }
     
     
     BOOL isUserInteractionenabled = imageView.userInteractionEnabled;
@@ -34,13 +38,9 @@
     //Checks if image exists
     BOOL imageExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
     
-    __block CGSize returnSize =  CGSizeMake(0, 0);
-    
     if (imageExists) {
         NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
         UIImage *image = [UIImage imageWithData:imageData];
-        
-        returnSize = image.size;
         
         if (imageView)
         {
@@ -77,12 +77,14 @@
         [spinner startAnimating];
         */
         
+        
         NSURL *urlObject = [NSURL URLWithString:url];
         NSURLRequest *urlRequest = [NSURLRequest requestWithURL:urlObject];
         
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
         
         dispatch_async(queue, ^{
+            
             NSURLResponse *response = nil;
             NSError *error = nil;
             
@@ -103,8 +105,6 @@
                     if (imageView)
                         imageView.image = image;
                     
-                    returnSize = image.size;
-                    
                     //Store image to tmp for later use
                     [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
                     
@@ -117,7 +117,6 @@
         /************/
     }
     
-    return returnSize;
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "UIConstants.h"
 #import "Engine.h"
 #import "UtilImage.h"
+#import "ImageZoom.h"
 
 @implementation POIDetailsView {
     NSMutableString* place;
@@ -115,17 +116,31 @@
     
     /****************/
     //POI Image
+    self.poiImage.userInteractionEnabled = YES;
+    
     [UtilImage loadAsyncImage:self.poiImage fromURL:poiDetails.poiImageURL];
+    
+    UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
+    imageTap.numberOfTapsRequired = 1;
+    [self.poiImage addGestureRecognizer:imageTap];
     /****************/
     
-    self.userNameComment.text = poiDetails.userNameComment;
+    NSString* userName = poiDetails.userNameComment;
+    if (userName==nil || [userName isKindOfClass:[NSNull class]] || [userName isEqualToString:@"null"] || userName.length==0)
+        userName = L(NOUSERCOMMENTS);
+    
+    self.userNameComment.text = userName;
     
     /****************/
     //User avatar image (the one with the comment)
     [UtilImage loadAsyncImage:self.userAvatarComment fromURL:poiDetails.userImageCommentURL];
     /****************/
     
-    [self.commentTextView setText:poiDetails.userComment];
+    NSString* comment = poiDetails.userComment;
+    if (comment==nil || [comment isKindOfClass:[NSNull class]] || [comment isEqualToString:@"null"] || comment.length==0)
+        comment = L(NOCOMMENT);
+    
+    [self.commentTextView setText:comment];
     
     self.whatYourFriendsThinkLabel.text = L(WHATYOURFRIENDSTHINK);
     
@@ -200,6 +215,14 @@
 }
 - (BOOL) isEmptyString:(id)obj {
     return obj == nil || ![obj isKindOfClass:[NSString class]] || ![obj length];
+}
+
+
+#pragma mark - Image tapped
+
+-(void) imageTapped:(UITapGestureRecognizer *)recognizer {
+    
+    [ImageZoom showImage:self.poiImage];
 }
 
 @end
