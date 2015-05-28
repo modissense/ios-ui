@@ -111,15 +111,15 @@
     
     POI *poi;
     
-    NSString* name = poi.name;
-    if (name.length > 19)
-    {
-        name = [NSString stringWithFormat:@"%@..", [name substringToIndex:17]];
-    }
-    
     for(int i = 0; i < self.pointsOfInterest.count; i++)
     {
         poi = [self.pointsOfInterest objectAtIndex:i];
+        
+        NSString* name = poi.name;
+        if (name.length > 19)
+        {
+            name = [NSString stringWithFormat:@"%@..", [name substringToIndex:17]];
+        }
         
         NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
                               [[NSNumber alloc] initWithDouble:poi.location.coordinate.latitude],       MAP_LATITUDE_KEY,
@@ -157,7 +157,7 @@
         pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationIdentifier];
     }
     
-    pinView.animatesDrop = NO;
+    pinView.animatesDrop = YES;
     pinView.canShowCallout = YES;
     
     if (self.pointsOfInterest.count>0)

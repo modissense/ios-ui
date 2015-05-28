@@ -709,7 +709,7 @@
 
 
 
-#pragma mark Get blog POIs call & delegate
+#pragma mark - Get blog POIs call & delegate
 
 
 -(void)refreshBlog {
